@@ -311,6 +311,18 @@ span.psw {
 	
 	
 </style>
+
+//Execute shell script based on the form submission
+<?php
+    if (isset($_POST['donald'])) {
+        shell_exec('/home/ubuntu/vote.sh D');
+    }
+    elseif(isset($_POST['hillary'])) {
+        shell_exec('/home/ubuntu/vote.sh H');
+    }
+?>
+        
+/*OLD CODE COPIED FROM TUTORIAL (REMOVE WHEN UNEEDED)**************************
 <?php
     if( isset( $_GET['vote'] ) ){
 
@@ -367,12 +379,16 @@ span.psw {
         exit( $response );
     }
 ?>
+*****************************************************************************/
+       
 <!DOCTYPE html>
 <html>
     <head>
         <meta charset="UTF-8">
         <title>Secure Login: Protected Page</title>
         <link rel="stylesheet" href="styles/main.css" />
+        
+/*OLD CODE COPIED FROM TUTORIAL (REMOVE WHEN UNEEDED)**************************
         <script>
             function getVote(int) {
               if (window.XMLHttpRequest) {
@@ -391,6 +407,7 @@ span.psw {
               xmlhttp.send();
             }
         </script>
+*****************************************************************************/
     
     </head>
     <body>
@@ -398,14 +415,10 @@ span.psw {
         <p>Welcome <?php echo htmlentities($_SESSION['username']); ?>!</p>
             <div id="poll">
             <h1>Who do you want to vote for...</h1>
-            <form>
-                <!--
-                    curious to know why "yes" has a value of 0 and "no" has a value of 1 - seems
-                    kind of back to front...
-                -->
-                Donald Trump <input type="radio" name="vote" value="0" onclick="getVote(this.value)">
+            <form method="post" action="castVote.php">
+                <input type="radio" name="donald" value="0" /*onclick="getVote(this.value)"*/> Donald Trump 
                 <br>
-                Hillary Clinton <input type="radio" name="vote" value="1" onclick="getVote(this.value)">
+                <input type="radio" name="hillary" value="1" /*onclick="getVote(this.value)"*/> Hillary Clinton 
                 
                 <br>
 				<br>
