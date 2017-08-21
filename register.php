@@ -323,6 +323,10 @@ span.psw {
 	
 	
 </style>
+
+<!-- captcha script implementation -->
+<script src='https://www.google.com/recaptcha/api.js'></script>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -363,6 +367,10 @@ span.psw {
             Confirm password: <input type="password" 
                                      name="confirmpwd" 
                                      id="confirmpwd" /><br>
+	    <!--captcha implementation from googles re-captcha package-->
+		<div class="g-recaptcha" data-sitekey="6LcMZiwUAAAAAOXbpmQMVRoWUCKt2Tyf4RrhuSr_">
+
+		</div>
             <input type="button" 
                    value="Register" 
                    onclick="return regformhash(this.form,
