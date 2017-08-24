@@ -59,6 +59,25 @@ if (isset($_POST['username'], $_POST['email'], $_POST['p'])) {
     } else {
         $error_msg .= '<p class="error">Database error</p>';
     }
+	
+	
+	//valid the duplicate username
+	$prep_stmt = "SELECT id FROM members WHERE username = ? LIMIT 1";
+    $stmt = $mysqli->prepare($prep_stmt);
+    
+    if ($stmt) {
+        $stmt->bind_param('s', $username);
+        $stmt->execute();
+        $stmt->store_result();
+        
+        if ($stmt->num_rows == 1) {
+            // A user with this username already exists
+            $error_msg .= '<p class="error">A user with this  username already exists.</p>';
+        }
+    } else {
+        $error_msg .= '<p class="error">Database error</p>';
+    }
+	
     
     // TODO: 
     // We'll also have to account for the situation where the user doesn't have
