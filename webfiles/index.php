@@ -401,8 +401,6 @@ Secure Voting System
       <input type="button" 
                    value="Login" 
                    onclick="formhash(this.form, this.form.password);" /> 
-      <!--onclick="location.href='vote.php'"-->
-      <!-- onclick="location.href='vote.html'" -->
       <input type="checkbox" checked="checked"> Remember me
       <p>If you don't have a login, please <a href="register.php">register</a></p>
       <p>If you are done, please <a href="includes/logout.php">log out</a>.</p>

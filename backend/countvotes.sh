@@ -1,6 +1,8 @@
 #!/bin/bash
-hillary=0
-donald=0
+for ((r=0;r<=22;i++)) do
+    ${results[$r]}=0
+done
+
 p='/home/ubuntu/tmpcountvotes'
 #Grab all addresses from blockchain
 echo $(multichain-cli ausvoting getaddresses) > $p/addresses
@@ -40,21 +42,27 @@ do
 		#Decrypt Vote with Random Password
 		openssl enc -d -aes-256-cbc -in $dir/vote.txt.enc -out $dir/vote.txt -pass file:$dir/key.bin
 
-		#Count em up
-		if grep -q "hillary" $dir/"vote.txt";
-		then
-			hillary=$((hillary+1))
-		else
-			donald=$((donald+1))
-		fi
+#		Count em up
+#		if grep -q "hillary" $dir/"vote.txt";
+#		then
+#			hillary=$((hillary+1))
+#		else
+#			donald=$((donald+1))
+#		fi
+        vote = $(cat $dir/"vote.txt")
+        ${results[$vote]}=$((results[$vote]+1))
 
 		#Cleanup temp directory to have mercy on storage
 		rm $dir -r
 	fi
 done
 #Output Results
-echo $hillary > /home/ubuntu/hillary.txt
-echo $donald > /home/ubuntu/donald.txt
+for ((r=0;r<=22;i++)) do
+    echo ${results[$r]}= > /var/www/html/results/$r.txt
+done
+
+#echo $hillary > /home/ubuntu/hillary.txt
+#echo $donald > /home/ubuntu/donald.txt
 
 #Cleanup Temporary Files
 rm $p/* -r

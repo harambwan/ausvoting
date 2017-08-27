@@ -1,45 +1,41 @@
 #!/bin/bash
 #Public Key file myst be located at ~/votekey/
-#Must have argument "D" or "H"
-if [ "$1" = "D" ] || [ "$1" = "H" ]
-then
-	#Generate wallet ID
-	address=$(multichain-cli ausvoting getnewaddress)
 
-	#Make Vote
-	mkdir /tmp/$address
-	if [ "$1" = "D" ] ; then
-		echo "donald" > /tmp/$address/vote.txt
-	else
-		echo "hillary" > /tmp/$address/vote.txt
-	fi
+#Generate wallet ID
+address=$(multichain-cli ausvoting getnewaddress)
 
-	#Encrypt Vote
-	#Generate Random Password
-	openssl rand -base64 64 -out /tmp/$address/key.bin
-	#Encrypt File with Random Password
-	openssl enc -aes-256-cbc -salt -in /tmp/$address/vote.txt -out /tmp/$address/vote.txt.enc -pass file:/tmp/$address/key.bin
-	#Encrypt Random Password with Public Key
-	openssl rsautl -encrypt -inkey /home/ubuntu/votekey/public.pem -pubin -in /tmp/$address/key.bin -out /tmp/$address/key.bin.enc
+#Make Vote
+mkdir /tmp/$address
 
-	#Convert files to Hex > Shell Variable
-	vote=$(xxd -p -c 99999 /tmp/$address/vote.txt.enc)
-	key=$(xxd -p -c 99999 /tmp/$address/key.bin.enc)
+#if [ "$1" = "D" ] ; then
+#    echo "donald" > /tmp/$address/vote.txt
+#else
+#    echo "hillary" > /tmp/$address/vote.txt
+#fi
+echo $1 > /tmp/$address/vote.txt
 
-	#Grant write access
-	multichain-cli ausvoting grant $address send
+#Encrypt Vote
+#Generate Random Password
+openssl rand -base64 64 -out /tmp/$address/key.bin
+#Encrypt File with Random Password
+openssl enc -aes-256-cbc -salt -in /tmp/$address/vote.txt -out /tmp/$address/vote.txt.enc -pass file:/tmp/$address/key.bin
+#Encrypt Random Password with Public Key
+openssl rsautl -encrypt -inkey /home/ubuntu/votekey/public.pem -pubin -in /tmp/$address/key.bin -out /tmp/$address/key.bin.enc
 
-	#Write To Blockchain
-	#multichain-cli ausvoting subscribe voting
-	multichain-cli ausvoting publishfrom $address voting vote $vote
-	multichain-cli ausvoting publishfrom $address voting key $key
+#Convert files to Hex > Shell Variable
+vote=$(xxd -p -c 99999 /tmp/$address/vote.txt.enc)
+key=$(xxd -p -c 99999 /tmp/$address/key.bin.enc)
 
-	#Revoke write access
-	multichain-cli ausvoting revoke $address send
+#Grant write access
+multichain-cli ausvoting grant $address send
 
-	#Cleanup Temp Directory
-	rm /tmp/$address -r
+#Write To Blockchain
+#multichain-cli ausvoting subscribe voting
+multichain-cli ausvoting publishfrom $address voting vote $vote
+multichain-cli ausvoting publishfrom $address voting key $key
 
-else
-	echo "ERROR: ADD ARGUMENT 'D' OR 'H' TO EXECUTION"
-fi
+#Revoke write access
+multichain-cli ausvoting revoke $address send
+
+#Cleanup Temp Directory
+rm /tmp/$address -r

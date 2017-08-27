@@ -4,6 +4,14 @@ include_once 'includes/db_connect.php';
 include_once 'includes/functions.php';
 
 sec_session_start();
+
+if ($_SESSION['timeout'] + 20 * 60 < time()) {
+    //session times out, kill session etc...
+}
+else {
+    //continue somehow
+}
+
 ?>
 
 <style>
@@ -312,74 +320,22 @@ span.psw {
 	
 </style>
 
-//Execute shell script based on the form submission
+
 <?php
-    if (isset($_POST['donald'])) {
-        shell_exec('/home/ubuntu/vote.sh D');
-    }
-    elseif(isset($_POST['hillary'])) {
-        shell_exec('/home/ubuntu/vote.sh H');
-    }
-?>
-        
-/*OLD CODE COPIED FROM TUTORIAL (REMOVE WHEN UNEEDED)**************************
-<?php
-    if( isset( $_GET['vote'] ) ){
-
-        /* for testing - file in same directory as script */
-        $filename=__DIR__ . '\\poll.txt';
-
-        /* If the file exists, read it otherwise create empty object to store vote */
-        $contents=file_exists( $filename ) ? json_decode( file_get_contents( $filename ) ) : (object)array('yes'=>0,'no'=>0);
-
-        /* get the value of the vote cast */
-        $vote=intval( $_GET['vote'] );
-
-        /* increment the respective item */
-        switch( $vote ){
-            case 0:$contents->yes++; break;
-            case 1:$contents->no++; break;
+// Process form submission
+if(isset($_POST['submit'])) {
+    if(isset($_POST['candidate'])) {
+        $candidate = $_POST['candidate'];
+        if ($candidate >= 0) && ($candidate <= 22) {
+            // Execute shell script based on the form submission
+            $_SESSION['voted'] = vote($candidate);
+            //Redirect to results page
+            header("Location: ./results.php");
         }
-
-        /* write the data back to the text file */
-        file_put_contents( $filename, json_encode( $contents ) );
-
-        /* use the values from the json data */
-        $yes=$contents->yes;
-        $no=$contents->no;
-
-
-        /* use an object to aid caluclation of percentages ( makes easier notation imo )*/
-        $results=new StdClass;
-        $results->yes=100 * round( $yes /( $no + $yes ),2 );
-        $results->no=100 * round( $no /( $no + $yes ),2 );
-
-
-        /* structure the output response */
-        $response="
-            <h2>Result:</h2>
-            <table>
-                <tr>
-                    <td>Yes:</td>
-                    <td>
-                        <img src='poll.gif' width='{$results->yes}' height='20'> {$results->yes}%
-                    </td>
-                </tr>
-                <tr>
-                    <td>No:</td>
-                    <td>
-                        <img src='poll.gif' width='{$results->no}' height='20'> {$results->no}%
-                    </td>
-                </tr>
-            </table>";
-
-
-        /* send the data back to the ajax callback function */
-        clearstatcache();
-        exit( $response );
     }
+}
+    
 ?>
-*****************************************************************************/
        
 <!DOCTYPE html>
 <html>
@@ -387,27 +343,6 @@ span.psw {
         <meta charset="UTF-8">
         <title>Secure Login: Protected Page</title>
         <link rel="stylesheet" href="styles/main.css" />
-        
-/*OLD CODE COPIED FROM TUTORIAL (REMOVE WHEN UNEEDED)**************************
-        <script>
-            function getVote(int) {
-              if (window.XMLHttpRequest) {
-                xmlhttp=new XMLHttpRequest();
-              } else {
-                xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-              }
-              xmlhttp.onreadystatechange=function() {
-                if (this.readyState==4 && this.status==200) {
-                  document.getElementById("poll").innerHTML=this.responseText;
-                }
-              }
-
-              /* you will need to edit the url if you use a separate php script */
-              xmlhttp.open("GET","?vote="+int,true);
-              xmlhttp.send();
-            }
-        </script>
-*****************************************************************************/
     
     </head>
     <body>
@@ -415,18 +350,58 @@ span.psw {
         <p>Welcome <?php echo htmlentities($_SESSION['username']); ?>!</p>
             <div id="poll">
             <h1>Who do you want to vote for...</h1>
-            <form method="post" action="castVote.php">
-                <input type="radio" name="donald" value="0" /*onclick="getVote(this.value)"*/> Donald Trump 
+            <form method="post">
+                <input type="radio" name="candidate" value="0"> Book me in 
                 <br>
-                <input type="radio" name="hillary" value="1" /*onclick="getVote(this.value)"*/> Hillary Clinton 
-                
+                <input type="radio" name="candidate" value="1"> Is my smarthome secure enough? 
                 <br>
+                <input type="radio" name="candidate" value="2"> Creating a virtual pentesting lab
+                <br>
+                <input type="radio" name="candidate" value="3"> Voice as a password
+                <br>
+                <input type="radio" name="candidate" value="4"> Secure online voting system
+                <br>
+                <input type="radio" name="candidate" value="5"> One-TimePad VPN
+                <br>
+                <input type="radio" name="candidate" value="6"> Course Thermometer
+                <br>
+                <input type="radio" name="candidate" value="7"> Careers
+                <br>
+                <input type="radio" name="candidate" value="8"> Infrastructure as a service management tool
+                <input type="radio" name="candidate" value="9"> Excon
+                <br>
+                <input type="radio" name="candidate" value="10"> Pupilometer iOS
+                <br>
+                <input type="radio" name="candidate" value="11"> Pupilometer Android
+                <br>
+                <input type="radio" name="candidate" value="12"> Stratejos
+                <br>
+                <input type="radio" name="candidate" value="13"> Property Inspector
+                <br>
+                <input type="radio" name="candidate" value="14"> RedFid
+                <br>
+                <input type="radio" name="candidate" value="15"> ChatX
+                <br>
+                <input type="radio" name="candidate" value="16"> Follow Me Mail Redirection
+                <br>
+                <input type="radio" name="candidate" value="17"> Bus Tracker
+                <br>
+                <input type="radio" name="candidate" value="18"> Independent Games
+                <br>
+                <input type="radio" name="candidate" value="19"> ICE Project
+                <br>
+                <input type="radio" name="candidate" value="20"> Architectural Assessment using VR
+                <br>
+                <input type="radio" name="candidate" value="21"> Snobal Project
+                <br>
+                <input type="radio" name="candidate" value="22"> Capstone Promotional Material
 				<br>
-				<button value="submit">Submit Vote</button>
+				<input type="submit" name="submit" value="Submit">Submit Vote</button>
             </form>
         </div>
-            <p>Return to <a href="index.php">login page</a></p>
-        <?php else : ?>
+            
+            <p>Click here to <a href="includes/logout.php">Logout</a></p>
+        
             <p>
                 <span class="error">You are not authorized to access this page.</span> Please <a href="index.php">login</a>.
             </p>

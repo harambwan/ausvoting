@@ -1,23 +1,22 @@
 <?php
 
-/*
- * Copyright (C) 2013 peredur.net
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
-
 include_once 'psl-config.php';
+
+// Process vote by executing bash script
+function vote($candidate) {
+    //Check database to make sure user has not voted yet...
+    
+    
+    //If user has not voted
+    $old_path = getcwd();
+    chdir('/home/ubuntu/');
+    $output = shell_exec('./vote.sh ' + $candidate);
+    chdir($old_path);
+
+    //Insert into database that user has voted...
+    return true;
+
+}
 
 function sec_session_start() {
     $session_name = 'sec_session_id';   // Set a custom session name 
@@ -38,6 +37,9 @@ function sec_session_start() {
 
     // Sets the session name to the one set above.
     session_name($session_name);
+    
+    // Record session time for timeout
+    $_SESSION['timeout'] = time();
 
     session_start();            // Start the PHP session 
     session_regenerate_id();    // regenerated the session, delete the old one. 
@@ -80,6 +82,8 @@ function login($email, $password, $mysqli) {
                     // XSS protection as we might print this value
                     $username = preg_replace("/[^a-zA-Z0-9_\-]+/", "", $username);
 
+                    
+                    
                     $_SESSION['username'] = $username;
                     $_SESSION['login_string'] = hash('sha512', $password . $user_browser);
 

@@ -27,6 +27,8 @@ if (isset($_POST['email'], $_POST['p'])) {
     $password = $_POST['p']; // The hashed password.
     
     if (login($email, $password, $mysqli) == true) {
+        // ADD ‘If user has already voted, redirect to results.php’ displaying message 2)
+        
         // Login success 
         header("Location: ../protected_page.php");
         exit();
