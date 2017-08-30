@@ -3,7 +3,7 @@ for ((r=0;r<=22;i++)) do
     ${results[$r]}=0
 done
 
-p='/home/ubuntu/tmpcountvotes'
+p='/home/ubuntu/corescripts/tmpcountvotes'
 #Grab all addresses from blockchain
 echo $(multichain-cli ausvoting getaddresses) > $p/addresses
 #Parse addresses into array
@@ -38,7 +38,7 @@ do
 		xxd -p -r $dir/vote.txt.enc.hex $dir/vote.txt.enc
 		xxd -p -r $dir/key.bin.enc.hex $dir/key.bin.enc
 		#Decrypt Random Password with Private Key
-		openssl rsautl -decrypt -inkey /home/ubuntu/votekey/private.pem -in $dir/key.bin.enc -out $dir/key.bin
+		openssl rsautl -decrypt -inkey /home/ubuntu/corescripts/votekey/private.pem -in $dir/key.bin.enc -out $dir/key.bin
 		#Decrypt Vote with Random Password
 		openssl enc -d -aes-256-cbc -in $dir/vote.txt.enc -out $dir/vote.txt -pass file:$dir/key.bin
 
@@ -56,6 +56,7 @@ do
 		rm $dir -r
 	fi
 done
+
 #Output Results
 for ((r=0;r<=22;i++)) do
     echo ${results[$r]}= > /var/www/html/results/$r.txt

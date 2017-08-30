@@ -20,7 +20,7 @@ openssl rand -base64 64 -out /tmp/$address/key.bin
 #Encrypt File with Random Password
 openssl enc -aes-256-cbc -salt -in /tmp/$address/vote.txt -out /tmp/$address/vote.txt.enc -pass file:/tmp/$address/key.bin
 #Encrypt Random Password with Public Key
-openssl rsautl -encrypt -inkey /home/ubuntu/votekey/public.pem -pubin -in /tmp/$address/key.bin -out /tmp/$address/key.bin.enc
+openssl rsautl -encrypt -inkey /home/ubuntu/corescripts/votekey/public.pem -pubin -in /tmp/$address/key.bin -out /tmp/$address/key.bin.enc
 
 #Convert files to Hex > Shell Variable
 vote=$(xxd -p -c 99999 /tmp/$address/vote.txt.enc)

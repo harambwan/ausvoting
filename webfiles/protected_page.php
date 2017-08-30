@@ -5,12 +5,9 @@ include_once 'includes/functions.php';
 
 sec_session_start();
 
-/*if ($_SESSION['timeout'] + 20 * 60 < time()) {
-    //session times out, kill session etc...
+if ($_SESSION['timeout'] + 20 * 60 < time()) {
+    header("Location: includes/logout.php");
 }
-else {
-    //continue somehow
-}*/
 ?>
 
 <?php
@@ -21,6 +18,7 @@ if(isset($_POST['submit'])) {
         if ($candidate >= 0 && $candidate <= 22) {
             // Execute shell script based on the form submission
             $_SESSION['voted'] = vote($candidate);
+            
             //Redirect to results page
             header("Location: ./results.php");
         }
