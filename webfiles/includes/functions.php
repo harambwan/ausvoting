@@ -9,7 +9,7 @@ function vote($candidate) {
     
     //If user has not voted
     $old_path = getcwd();
-    chdir('/home/ubuntu/');
+    chdir('/home/ubuntu/corescripts');
     $output = shell_exec('./vote.sh ' + $candidate);
     chdir($old_path);
 

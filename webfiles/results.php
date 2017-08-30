@@ -1,10 +1,11 @@
 <?php
+include 'includes/functions.php';
 sec_session_start();
 
-If $_SESSION['voted'] == TRUE {
-    echo "Thanks for voting... Results will be displayed here once voting period has ended!"
+If ($_SESSION['voted'] == TRUE) {
+    echo "Thanks for voting... Results will be displayed here once voting period has ended!";
+    echo "You have been logged out.";
     
-    include_once 'includes/functions.php';
     // Unset all session values 
     $_SESSION = array();
     // get session parameters 
@@ -13,14 +14,12 @@ If $_SESSION['voted'] == TRUE {
     setcookie(session_name(),'', time() - 42000, $params["path"], $params["domain"], $params["secure"], $params["httponly"]);
     // Destroy session 
     session_destroy();
-    exit();
 }
 
     
-If $_SESSION['voted'] == FALSE {
-    echo "You have already voted!"
+If ($_SESSION['voted'] == FALSE) {
+    echo "You have already voted, or you are not logged in...";
     
-    include_once 'includes/functions.php'
     // Unset all session values 
     $_SESSION = array();
     // get session parameters 
@@ -29,8 +28,10 @@ If $_SESSION['voted'] == FALSE {
     setcookie(session_name(),'', time() - 42000, $params["path"], $params["domain"], $params["secure"], $params["httponly"]);
     // Destroy session 
     session_destroy();
-    exit();
 }
+?>
+
+<!--Add php if statement for if user is not logged in prompt them to login--->
 
 <html>
     <head>
@@ -39,76 +40,32 @@ If $_SESSION['voted'] == FALSE {
     <body>
         <br>
         <a href="index.php">Home Page</a>
-        <br>
-        Book me in:
-        <iframe src="results/0.txt"></iframe>
-        <br>
-        Is my smart home secure enough:
-        <iframe src="results/1.txt"></iframe>
-        <br>
-        Creating a virtual pen testing lab:
-        <iframe src="results/2.txt"></iframe>
-        <br>
-        Voice as a password:
-        <iframe src="results/3.txt"></iframe>
-        <br>
-        Australian secure online voting system:
-        <iframe src="results/4.txt"></iframe>
-        <br>
-        One-TimePad VPN:
-        <iframe src="results/5.txt"></iframe>
-        <br>
-        Course Thermometer:
-        <iframe src="results/6.txt"></iframe>
-        <br>
-        Careers:
-        <iframe src="results/7.txt"></iframe>
-        <br>
-        Infrastructure as a service:
-        <iframe src="results/8.txt"></iframe>
-        <br>
-        Excon:
-        <iframe src="results/9.txt"></iframe>
-        <br>
-        Pupillometer iOS:
-        <iframe src="results/10.txt"></iframe>
-        <br>
-        Pupillometer Android:
-        <iframe src="results/11.txt"></iframe>
-        <br>
-        Stratejos:
-        <iframe src="results/12.txt"></iframe>
-        <br>
-        Property Inspector:
-        <iframe src="results/13.txt"></iframe>
-        <br>
-        RedFid:
-        <iframe src="results/14.txt"></iframe>
-        <br>
-        ChatX:
-        <iframe src="results/15.txt"></iframe>
-        <br>
-        Follow Me mail-redirection:
-        <iframe src="results/16.txt"></iframe>
-        <br>
-        Bus tracker:
-        <iframe src="results/17.txt"></iframe>
-        <br>
-        Independent Games:
-        <iframe src="results/18.txt"></iframe>
-        <br>
-        ICE project:
-        <iframe src="results/19.txt"></iframe>
-        <br>
-        Architectural assessment using VR:
-        <iframe src="results/20.txt"></iframe>
-        <br>
-        Snobal project:
-        <iframe src="results/21.txt"></iframe>
-        <br>
-        Capstone promotion material:
-        <iframe src="results/22.txt"></iframe>
+        <br><br>
+        
+        <?php
+        echo "Book me in: ", file_get_contents('results/0.txt'), "<br>";
+        echo "Is my smart home secure enough: ", file_get_contents('results/1.txt'), "<br>";
+        echo "Creating a virtual pen testing lab: ", file_get_contents('results/2.txt'), "<br>";
+        echo "Voice as a password:", file_get_contents('results/3.txt'), "<br>";
+        echo "Australian secure online voting system: ", file_get_contents('results/4.txt'), "<br>";
+        echo "One-TimePad VPN: ", file_get_contents('results/5.txt'), "<br>";
+        echo "Course Thermometer: ", file_get_contents('results/6.txt'), "<br>";
+        echo "Careers: ", file_get_contents('results/7.txt'), "<br>";
+        echo "Infrastructure as a service: ", file_get_contents('results/8.txt'), "<br>";
+        echo "Excon: ", file_get_contents('results/9.txt'), "<br>";
+        echo "Pupillometer iOS: ", file_get_contents('results/10.txt'), "<br>";
+        echo "Pupillometer android: ", file_get_contents('results/11.txt'), "<br>";
+        echo "Stratejos: ", file_get_contents('results/12.txt'), "<br>";
+        echo "Property inspector: ", file_get_contents('results/13.txt'), "<br>";
+        echo "RedFid: ", file_get_contents('results/14.txt'), "<br>";
+        echo "ChatX: ", file_get_contents('results/15.txt'), "<br>";
+        echo "Follow Me mail-redirection: ", file_get_contents('results/16.txt'), "<br>";
+        echo "Bus tracker: ", file_get_contents('results/17.txt'), "<br>";
+        echo "Independent Games: ", file_get_contents('results/18.txt'), "<br>";
+        echo "ICE project: ", file_get_contents('results/19.txt'), "<br>";
+        echo "Architectural assessment using VR: ", file_get_contents('results/20.txt'), "<br>";
+        echo "Snobal project: ", file_get_contents('results/21.txt'), "<br>";
+        echo "Capstone promotion material: ", file_get_contents('results/22.txt'), "<br>";
+        ?>
     </body>
 </html>
-?>
-Click here to <a href="includes/logout.php">Logout</a>

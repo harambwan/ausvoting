@@ -290,7 +290,7 @@ if(isset($_POST['submit'])) {
 				</div>
 			</div>
 		</div>
-		<button value="submit" class="btn" style="background-color: #4CA1AF; color: #fff;">Submit</button>
+		<button value="submit" name="submit" class="btn" style="background-color: #4CA1AF; color: #fff;">Submit</button>
 	<?php else : ?>
 			<br />
             <p>

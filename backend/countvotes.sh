@@ -1,7 +1,5 @@
 #!/bin/bash
-for ((r=0;r<=22;i++)) do
-    ${results[$r]}=0
-done
+results=(0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0)
 
 p='/home/ubuntu/corescripts/tmpcountvotes'
 #Grab all addresses from blockchain
@@ -49,8 +47,8 @@ do
 #		else
 #			donald=$((donald+1))
 #		fi
-        vote = $(cat $dir/"vote.txt")
-        ${results[$vote]}=$((results[$vote]+1))
+        vote=$(cat $dir/"vote.txt")
+        (( results[vote]++ ))
 
 		#Cleanup temp directory to have mercy on storage
 		rm $dir -r
@@ -58,8 +56,9 @@ do
 done
 
 #Output Results
-for ((r=0;r<=22;i++)) do
-    echo ${results[$r]}= > /var/www/html/results/$r.txt
+for i in "${results[@]}"
+do
+    echo $i > /var/www/html/results/$@.txt
 done
 
 #echo $hillary > /home/ubuntu/hillary.txt

@@ -173,7 +173,7 @@ if (login_check($mysqli) == true) {
 <br />
       <p style="font-size: 15px;">If you don't have a login, please <a href="register.php">register</a>.</p>
       <p style="font-size: 15px;">You are currently logged <?php echo $logged ?>.</p>
-	  <input type="button" value="Login" class="button" style="margin-bottom: 10px; margin-top: 10px;"
+	  <input type="submit" value="Login" class="button" style="margin-bottom: 10px; margin-top: 10px;"
                    onclick="formhash(this.form, this.form.password);" /> 
       <!--onclick="location.href='vote.php'"-->
       <!-- onclick="location.href='vote.html'" -->
