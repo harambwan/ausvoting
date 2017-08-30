@@ -11,415 +11,178 @@ if (login_check($mysqli) == true) {
     $logged = 'out';
 }
 ?>
-
-<style>
-	
-	h2 {
-		color : white;
-		padding top: 2vh;
-		padding left: 80%;
-	}
-	
-	body {
-    padding: 0;
-    margin: 0;
-    font-family: Arial;
-    font-size: 17px;
-    background-image: url("background copy.jpg");
-		background-size: 100vw 100vh;
-		background-repeat: no-repeat;
-    background-position: right top;
-    background-attachment: fixed;
-
-}
-#nav {
-    background-color: #222;
-}
-#nav_wrapper {
-    width: 100%;
-    margin: 0 auto;
-    text-align: left;
-}
-#nav ul {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-    position: relative;
-    min-width: 200px;
-}
-#nav ul li {
-    display: inline-block;
-}
-#nav ul li:hover {
-    background-color: #333;
-}
-#nav ul li a, visited {
-    color: #CCC;
-    display: block;
-    padding: 15px;
-    text-decoration: none;
-}
-#nav ul li:hover ul {
-    display: block;
-}
-#nav ul ul {
-    display: none;
-    position: absolute;
-    background-color: #333;
-    border: 5px solid #222;
-    border-top: 0;
-    margin-left: -5px;
-}
-#nav ul ul li {
-    display: block;
-}
-#nav ul ul li a:hover {
-    color: #699;
-}
-
-	/*
-	p {
-    border-bottom: 6px solid red;
-    background-color: lightgrey;
-	}
-	*/
-	
-	input[type=text], input[type=password] {
-    width: 100%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    display: inline-block;
-    border: 1px solid #ccc;
-    box-sizing: border-box;
-}
-
-/* Set a style for all buttons */
-button {
-    background-color: #4CAF50;
-    color: white;
-    padding: 14px 20px;
-    margin: 8px 0;
-    border: none;
-    cursor: pointer;
-    width: 100%;
-}
-
-/* Extra styles for the cancel button */
-.cancelbtn {
-    padding: 14px 20px;
-    background-color: #f44336;
-}
-
-/* Float cancel and signup buttons and add an equal width */
-.cancelbtn,.signupbtn {float:left;width:50%}
-
-/* Add padding to container elements */
-.container {
-    padding: 16px;
-}
-
-/* The Modal (background) */
-.modal {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
-    left: 0;
-    top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-    padding-top: 60px;
-}
-
-/* Modal Content/Box */
-.modal-content {
-    background-color: #fefefe;
-    margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
-    border: 1px solid #888;
-    width: 80%; /* Could be more or less, depending on screen size */
-}
-
-/* The Close Button (x) */
-.close {
-    position: absolute;
-    right: 35px;
-    top: 15px;
-    color: #000;
-    font-size: 40px;
-    font-weight: bold;
-}
-
-.close:hover,
-.close:focus {
-    color: red;
-    cursor: pointer;
-}
-
-/* Clear floats */
-.clearfix::after {
-    content: "";
-    clear: both;
-    display: table;
-}
-
-/* Change styles for cancel button and signup button on extra small screens */
-@media screen and (max-width: 300px) {
-    .cancelbtn, .signupbtn {
-       width: 100%;
-    }
-}
-/* Full-width input fields */
-input[type=text], input[type=password] {
-    width: 100%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    display: inline-block;
-    border: 1px solid #ccc;
-    box-sizing: border-box;
-}
-
-/* Set a style for all buttons */
-button {
-    background-color: #4CAF50;
-    color: white;
-    padding: 14px 20px;
-    margin: 8px 0;
-    border: none;
-    cursor: pointer;
-    width: 100%;
-}
-
-button:hover {
-    opacity: 0.8;
-}
-
-/* Extra styles for the cancel button */
-.cancelbtn1 {
-    width: auto;
-    padding: 10px 18px;
-    background-color: #f44336;
-}
-	
-	/* Extra styles for the cancel button */
-.cancelbtn {
-    padding: 14px 20px;
-    background-color: #f44336;
-}
-
-/* Float cancel and signup buttons and add an equal width */
-.cancelbtn,.signupbtn {float:left;width:50%}
-
-
-/* Center the image and position the close button */
-.imgcontainer {
-    text-align: center;
-    margin: 24px 0 12px 0;
-    position: relative;
-}
-
-img.avatar {
-    width: 40%;
-    border-radius: 50%;
-}
-
-.container {
-    padding: 16px;
-}
-
-span.psw {
-    float: right;
-    padding-top: 16px;
-}
-
-/* The Modal (background) */
-.modal {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
-    left: 0;
-    top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-    padding-top: 60px;
-}
-
-/* Modal Content/Box */
-.modal-content {
-    background-color: #fefefe;
-    margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
-    border: 1px solid #888;
-    width: 80%; /* Could be more or less, depending on screen size */
-}
-
-	/* The Close Button (x) */
-.close {
-    position: absolute;
-    right: 35px;
-    top: 15px;
-    color: #000;
-    font-size: 40px;
-    font-weight: bold;
-}
-/* The Close Button (x) */
-	
-.close2 {
-    position: absolute;
-    right: 25px;
-    top: 0;
-    color: #000;
-    font-size: 35px;
-    font-weight: bold;
-}
-
-.close:hover,
-.close:focus {
-    color: red;
-    cursor: pointer;
-}
-	
-.close2:hover,
-.close2:focus {
-    color: red;
-    cursor: pointer;
-}
-
-/* Add Zoom Animation */
-.animate {
-    -webkit-animation: animatezoom 0.6s;
-    animation: animatezoom 0.6s
-}
-
-@-webkit-keyframes animatezoom {
-    from {-webkit-transform: scale(0)} 
-    to {-webkit-transform: scale(1)}
-}
-    
-@keyframes animatezoom {
-    from {transform: scale(0)} 
-    to {transform: scale(1)}
-}
-
-/* Change styles for span and cancel button on extra small screens */
-@media screen and (max-width: 300px) {
-    span.psw {
-       display: block;
-       float: none;
-    }
-    .cancelbtn, .signupbtn {
-       width: 100%;
-    }
-}
-	
-	
-</style>
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Secure Login: Log In</title>
-        <script type="text/JavaScript" src="js/sha512.js"></script> 
-        <script type="text/JavaScript" src="js/forms.js"></script> 
-    </head>
-    <body>
-       <h2><center>
-Secure Voting System
-</center></h2>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Australia Votes</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="Free HTML5 Template by FREEHTML5.CO" />
+	<meta name="keywords" content="free html5, free template, free bootstrap, html5, css3, mobile first, responsive" />
+	<meta name="author" content="FREEHTML5.CO" />
+    <script type="text/JavaScript" src="js/sha512.js"></script> 
+    <script type="text/JavaScript" src="js/forms.js"></script> 
+	<script type="text/JavaScript" src="js/modernizr-2.6.2.min.js"></script>
+	<link rel="stylesheet" href="styles/main.css">
+	<link rel="stylesheet" href="styles/animate.css">
+	<link rel="stylesheet" href="styles/icomoon.css">
+	<link rel="stylesheet" href="styles/simple-line-icons.css">
+	<link rel="stylesheet" href="styles/magnific-popup.css">
+	<link rel="stylesheet" href="styles/bootstrap.css">
+	<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,300,600,400italic,700' rel='stylesheet' type='text/css'>
+</head>
+<body>
 
-<div id="nav">
-    <div id="nav_wrapper">
-        <ul>
-            <!--<li><a href="#">Enrol to vote</a>
-              <ul>
-                    <li><a href="#" onclick="document.getElementById('id01').style.display='block'">Register to vote</a>
-                    </li>
-                    <li><a href="#">Change Address</a>
-                    </li>
-                    <li><a href="#">Change name</a>
-                    </li>
-				    <li><a href="#">Check enrolment</a>
-                    </li>
-                </ul>
-            </li>-->
-            
-            <li>
-            <a href="#" onclick="document.getElementById('id02').style.display='block'">Login</a>
-            </li>
-            <!--<li> <a href="#">Electoral Divisions</a>
-
-                <ul>
-                    <li><a href="electorate.html">Find my electoral division</a>
-                    </li>
-                    <li><a href="divisions.html">Current divisions</a>
-                    </li>
-                </ul>
-            </li>-->
-            
-                <!--<li> <a href="#">Elections</a>
-
-                <ul>
-                    <li><a href="elections.html">Federal elections</a>
-                    </li>
-                    <li><a href="by-elections.html">By-elections</a>
-                    </li>
-                    <li><a href="supplementery.html">Supplementary elections</a>
-                    </li>
-                    <li><a href="referendum.html">Referendums and plebencies</a>
-                    </li>
-                </ul>
-            </li>
-            <li> <a href="Education.html">Education</a>
-            </li>-->
+<div id="cssmenu">
+<img style="float: left; margin: 10px 10px 10px 10px; width: 13%;" src="images/logo.png">
+        <ul style="padding-top: 10px;">
+			<li><a href="#" onclick="document.getElementById('id02').style.display='block'">Login</a></li>
+            <li><a href="#">News</a></li>
+            <li><a href="#">Results</a></li>
         </ul>
     </div>
     <!-- Nav wrapper end -->
 </div>
-<!-- Nav end -->
        <?php
         if (isset($_GET['error'])) {
-            echo '<p class="error">Error Logging In!</p>';
+			$message = "Error Logging In!";
+            echo "<script type='text/javascript'>alert('$message');</script>";
         }
         ?> 
-        
-  <div id="id02" class="modal">
-  
-  <form class="modal-content animate" action="includes/process_login.php" method="post" name="login_form">
+<section id="fh5co-home" data-section="home" style="background-image: url(images/main.jpg);" data-stellar-background-ratio="0.5">
+	<div class="gradient"></div>
+	<div class="container">
+		<div class="text-wrap">
+			<div class="text-inner">
+				<div class="row">
+					<div class="col-md-8 col-md-offset-2">
+							<div style="padding-top: 10px;" >
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+	<div class="slant"></div>
+</section>
+<section id="fh5co-intro">
+	<div class="container">
+		<div class="row row-bottom-padded-lg">
+			<div class="fh5co-block to-animate" style="background-image: url(images/house.jpg);">
+				<div class="overlay-darker"></div>
+				<div class="overlay"></div>
+				<div class="fh5co-text">
+					<h2 style="font-size: 20px;">Fast</h2>
+					<br />
+					<p style="font-size: 15px;">Faster than any ballot box, Australia Votes has been developed to be as seamless as possible, with voting taking no more than 5-10 minutes.<br/></p>
+				</div>
+			</div>
+			<div class="fh5co-block to-animate" style="background-image: url(images/parliament.jpg);">
+				<div class="overlay-darker"></div>
+				<div class="overlay"></div>
+				<div class="fh5co-text">
+					<h2 style="font-size: 20px;">Secure</h2>
+					<br />
+					<p style="font-size: 15px;">Australia's new online voting system has been developed with your security and privacy our greatest priority. Rest assured that our innovative system prevents anyone from accessing your personal information.</p>
+				</div>
+			</div>
+			<div class="fh5co-block to-animate" style="background-image: url(images/opera.jpg);">
+				<div class="overlay-darker"></div>
+				<div class="overlay"></div>
+				<div class="fh5co-text">
+					<h2 style="font-size: 20px;">Simple</h2>
+					<br />
+					<p style="font-size: 15px;">Created entirely with users in mind from all walks of life, our innovative voting platform will make it easier to vote then ever before.</p>
+				</div>
+			</div>
+		</div>
+	
+		<div class="row watch-video text-center to-animate" style="margin-left: 0;">
+			<div class="col-md-12 section-heading text-center">
+				<h2 class="to-animate" data-section="general" style="margin-left: 0; font-size: 25px; padding-top: 20px;">Announcements</h2>
+			</div>
+			<div class="col-md-6 to-animate col-md-offset-3">
+					<h3 style="margin-left: 0; font-size: 20px; margin-top: -5px; width: 100%;">Login to vote for the most impressive project showcase - 23rd August, 2017</h3>
+					<br/>
+					<p style="font-size: 17px;">Throughout the showcase, you would have come across many impressive and innovative projects. Australia Votes allows you to vote for your favourite project, with results and winners released at the end of the event. Login to cast your vote!</p>
+					<br />
+					<h3 style="margin-left: 0; font-size: 20px;">Australia Votes enters Beta Testing - 23rd August, 2017</h3>
+					<br/>
+					<p style="font-size: 17px;">Australia Votes has been developed in collaboration with Deakin University to allow federal, state and local elections to enter the digital space. A team of talented students set out to bridge the gap while developing a platform with the necessary security for this critical infrastructure. We present to you, the public, Australia Votes.</p>
+					<br />
+			</div>
+		</div>
+	</div>
+</section>
+<section id="fh5co-services" data-section="services">
+	<div class="container text-center">
+		<div class="row">
+			<div class="col-md-12 section-heading text-center">
+				<h2 class="left-border to-animate" style="font-size: 25px; margin-left: -3%; padding-top: 50px;">Infrastructure</h2>
+				<div class="row">
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-6 col-sm-6 fh5co-service to-animate">
+				<i class="icon to-animate-2 icon-lock" style="margin-bottom: -10px;"></i>
+				<h3 style="font-size: 25px; font-weight: 400;">Security</h3>
+				<p style="font-size: 17px;">State-of-the-art security schemes and data encryption techniques provide a stable, secure and robust voting system.</p>
+			</div>
+			<div class="col-md-6 col-sm-6 fh5co-service to-animate">
+				<i class="icon to-animate-2 icon-link" style="margin-bottom: -10px;"></i>
+				<h3 style="font-size: 25px; font-weight: 400;">Blockchain</h3>
+				<p style="font-size: 17px;">This groundbreaking technology utilised by crypto-currencies ensures vote integrity is preserved and data is available at all times.</p>
+			</div>
+			<div class="clearfix visible-sm-block"></div>
+			<div class="col-md-6 col-sm-6 fh5co-service to-animate">
+				<i class="icon to-animate-2 icon-support" style="margin-bottom: -10px; margin-top: 20px;"></i>
+				<h3 style="font-size: 25px; font-weight: 400;">Confidentiality</h3>
+				<p style="font-size: 17px;">Robust encryption algorithms prevent your personal or voting information from being disclosed to anyone but you.</p>
+			</div>
+			<div class="col-md-6 col-sm-6 fh5co-service to-animate">
+				<i class="icon to-animate-2 icon-layers2" style="margin-bottom: -15px; margin-top: 20px;"></i>
+				<h3 style="font-size: 25px; font-weight: 400;">Integrity</h3>
+				<p style="font-size: 17px;">Innovative blockchain technology prevents data modification. After submitting your vote, only AEC technology can decrypt and count your vote. </p>
+			<br />
+			<br />
+			</div>
+		</div>
+	</div>
+</section>
+
+<div id="id02" class="modal">
+<form class="modal-content animate" action="includes/process_login.php" method="post" name="login_form">
     <div class="imgcontainer">
-      <span onclick="document.getElementById('id02').style.display='none'" class="close2" title="Close Modal">&times;</span>
-    </div>
-
-    <div class="container">
-      <label><b>Username:</b></label>
-      <input type="text" placeholder="Enter Username" name="email" required>
-
-      <label><b>Password:</b></label>
-      <input type="password" placeholder="Enter Password" name="password" id="password" required>
-        
-      <input type="button" 
-                   value="Login" 
-                   onclick="formhash(this.form, this.form.password);" /> 
-      <input type="checkbox" checked="checked"> Remember me
-      <p>If you don't have a login, please <a href="register.php">register</a></p>
-      <p>If you are done, please <a href="includes/logout.php">log out</a>.</p>
-      <p>You are currently logged <?php echo $logged ?>.</p>
-    </div>
-
-    <div class="container" style="background-color:#f1f1f1">
-      <button type="button" onclick="document.getElementById('id02').style.display='none'" class="cancelbtn1">Cancel</button>
-      <span class="psw">Forgot <a href="#" onclick="document.getElementById('id03').style.display='block' , document.getElementById('id02').style.display='none'">password?</a></span>
-    </div>
-    
-    
-  </form>
+    <span onclick="document.getElementById('id02').style.display='none'" class="close2" title="Close Modal">&times;</span>
 </div>
 
+<div class="container">
+<img src="images/logo.png" style="width: 30%; margin-top: -10px">
+<br />
+<br />
+    <label><b>Username:</b></label>
+    <input type="text" placeholder="" name="email" required>
+<br />
+    <label><b>Password:</b></label>
+    <input type="password" placeholder="" name="password" id="password" required>
+<br />      
+<br />
+      <p style="font-size: 15px;">If you don't have a login, please <a href="register.php">register</a>.</p>
+      <p style="font-size: 15px;">You are currently logged <?php echo $logged ?>.</p>
+	  <input type="button" value="Login" class="button" style="margin-bottom: 10px; margin-top: 10px;"
+                   onclick="formhash(this.form, this.form.password);" /> 
+      <!--onclick="location.href='vote.php'"-->
+      <!-- onclick="location.href='vote.html'" -->
+    </div>
+</form>
+</div>
 <script>
 // Get the modal
 var modal = document.getElementById('id02');
-
 // When the user clicks anywhere outside of the modal, close it
 window.onclick = function(event) {
     if (event.target == modal) {
@@ -427,7 +190,35 @@ window.onclick = function(event) {
     }
 }
 </script>
-        
-       
-    </body>
+<footer id="footer" role="contentinfo">
+	<div class="container">
+		<div class="">
+			<div class="col-md-12 text-center">
+				<p style="font-size: 17px;">Australia Votes | A Secure Online Voting System <br>This website was created in fulfilment of requirements of the Deakin University unit SIT302 - Project Delivery. <br />All imagery and logos have been labeled for reuse.</p>
+			</div>
+		<img src="images/deakin.jpg" style="width: 15%; display: block; margin: 0 auto; padding-top: 10px; margin-bottom: -20px; padding-top: 20px;">
+		</div>
+		<a href="#" class="gotop js-gotop" style="padding-top: 20px; padding-bottom: 10px;"><i class="icon-arrow-up2" style="color: #4CA1AF;"></i></a>
+	</div>
+</footer>
+<script src="js/jquery.min.js"></script>
+<!-- jQuery Easing -->
+<script src="js/jquery.easing.1.3.js"></script>
+<!-- Bootstrap -->
+<script src="js/bootstrap.min.js"></script>
+<!-- Waypoints -->
+<script src="js/jquery.waypoints.min.js"></script>
+<!-- Stellar Parallax -->
+<script src="js/jquery.stellar.min.js"></script>
+<!-- Counter -->
+<script src="js/jquery.countTo.js"></script>
+<!-- Magnific Popup -->
+<script src="js/jquery.magnific-popup.min.js"></script>
+<script src="js/magnific-popup-options.js"></script>
+<!-- Google Map -->
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCefOgb1ZWqYtj7raVSmN4PL2WkTrc-KyA&sensor=false"></script>
+<script src="js/google_map.js"></script>
+<!-- Main JS (Do not remove) -->
+<script src="js/main.js"></script>
+</body>
 </html>
