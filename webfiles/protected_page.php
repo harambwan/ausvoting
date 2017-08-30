@@ -5,12 +5,30 @@ include_once 'includes/functions.php';
 
 sec_session_start();
 
-if (login_check($mysqli) == true) {
-    $logged = 'in';
-} else {
-    $logged = 'out';
+/*if ($_SESSION['timeout'] + 20 * 60 < time()) {
+    //session times out, kill session etc...
 }
+else {
+    //continue somehow
+}*/
 ?>
+
+<?php
+// Process form submission
+if(isset($_POST['submit'])) {
+    if(isset($_POST['candidate'])) {
+        $candidate = $_POST['candidate'];
+        if ($candidate >= 0 && $candidate <= 22) {
+            // Execute shell script based on the form submission
+            $_SESSION['voted'] = vote($candidate);
+            //Redirect to results page
+            header("Location: ./results.php");
+        }
+    }
+}
+    
+?>
+       
 <!DOCTYPE html>
 <html>
     <head>
@@ -31,173 +49,268 @@ if (login_check($mysqli) == true) {
 	<link rel="stylesheet" href="styles/magnific-popup.css">
 	<link rel="stylesheet" href="styles/bootstrap.css">
 	<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,300,600,400italic,700' rel='stylesheet' type='text/css'>
-</head>
-<body>
-
 <div id="cssmenu">
 <img style="float: left; margin: 10px 10px 10px 10px; width: 13%;" src="images/logo.png">
         <ul style="padding-top: 10px;">
-			<li><a href="#" onclick="document.getElementById('id02').style.display='block'">Login</a></li>
-            <li><a href="#">News</a></li>
-            <li><a href="#">Results</a></li>
+		<?php if (login_check($mysqli) == true) {
+			echo '<li><a href="includes/logout.php">Logout</a></li>';
+		}
+		else {
+			echo '<li><a href="index.php">Home</a></li>';
+		}
+		?>
         </ul>
-    </div>
     <!-- Nav wrapper end -->
 </div>
-       <?php
-        if (isset($_GET['error'])) {
-			$message = "Error Logging In!";
-            echo "<script type='text/javascript'>alert('$message');</script>";
-        }
-        ?> 
-<section id="fh5co-home" data-section="home" style="background-image: url(images/main.jpg);" data-stellar-background-ratio="0.5">
-	<div class="gradient"></div>
-	<div class="container">
-		<div class="text-wrap">
-			<div class="text-inner">
+</head>
+<body>
+<section id="fh5co-services" data-section="services" style="width: 100%;">
+	<div class="container text-center">
+	<?php if (login_check($mysqli) == true) : ?>
+        <p style="font-size: 25px;">Welcome <?php echo htmlentities($_SESSION['username']); ?>!</p>
+		<div class="row">
+			<div class="col-md-12 section-heading text-center">
+				<br />
+				<h2 class="left-border to-animate" style="font-size: 25px;">Select your Candidate</h2>
 				<div class="row">
-					<div class="col-md-8 col-md-offset-2">
-							<div style="padding-top: 10px;" >
-							</div>
-						</div>
-					</div>
+				<p>Choose the project you feel delivered the most impressive demonstration and standout pitch at the capstone showcase. Carefully select your candidate and submit your vote using the button below. </p>
+				<br />
+				<br />
+				<br />
 				</div>
-
 			</div>
 		</div>
 	</div>
-	<div class="slant"></div>
 </section>
 <section id="fh5co-intro">
-	<div class="container">
+<form method="post">
+	<div class="container" style="text-align: center;">
 		<div class="row row-bottom-padded-lg">
-			<div class="fh5co-block to-animate" style="background-image: url(images/house.jpg);">
+			<div class="fh5co-block to-animate" style="background-image: url(images/books.jpg); margin-left: 4%; width: 30%; margin-right: 1%; margin-bottom: 1%;">
 				<div class="overlay-darker"></div>
 				<div class="overlay"></div>
 				<div class="fh5co-text">
-					<h2 style="font-size: 20px;">Fast</h2>
-					<br />
-					<p style="font-size: 15px;">Faster than any ballot box, Australia Votes has been developed to be as seamless as possible, with voting taking no more than 5-10 minutes.<br/></p>
+					<h2 style="font-size: 17px;">Book Me In</h2>
+					<p style="font-size: 15px;">A novel mobile app for appointment management. Services providers will list the categories of services they deliver, duration of service category and working hours. End users can then search available services and retrieve providers.</p>
+					<br /><input type="radio" name="candidate" value="0">
 				</div>
 			</div>
-			<div class="fh5co-block to-animate" style="background-image: url(images/parliament.jpg);">
+			<div class="fh5co-block to-animate" style="background-image: url(images/smart.jpg); width: 30%; margin-right: 1%; margin-bottom: 1%;">
 				<div class="overlay-darker"></div>
 				<div class="overlay"></div>
 				<div class="fh5co-text">
-					<h2 style="font-size: 20px;">Secure</h2>
-					<br />
-					<p style="font-size: 15px;">Australia's new online voting system has been developed with your security and privacy our greatest priority. Rest assured that our innovative system prevents anyone from accessing your personal information.</p>
+					<h2 style="font-size: 17px;">Is My Smart Home Secure Enough</h2>
+					<p style="font-size: 15px;">Internet of Things is the new big revolution. Every single object around is is going to be internet enabled with osome intelligence built-in. This project assesses the security of a smart home system and recommendations on the best way to build them.</p>
+					<br /><input type="radio" name="candidate" value="1">
 				</div>
 			</div>
-			<div class="fh5co-block to-animate" style="background-image: url(images/opera.jpg);">
+			<div class="fh5co-block to-animate" style="background-image: url(images/virtual.jpg); width: 30%; margin-bottom: 1%;">
 				<div class="overlay-darker"></div>
 				<div class="overlay"></div>
 				<div class="fh5co-text">
-					<h2 style="font-size: 20px;">Simple</h2>
-					<br />
-					<p style="font-size: 15px;">Created entirely with users in mind from all walks of life, our innovative voting platform will make it easier to vote then ever before.</p>
+					<h2 style="font-size: 17px;">Creating a Virtual Pentesting Lab</h2>
+					<p style="font-size: 15px;">A virtual hacking environment that allows users to practice their hacking skills consisting of a small network of connected machines. The environment will provide a platform for practicing penetration testing techniques in web and networks.</p>
+					<br /><input type="radio" name="candidate" value="2">
 				</div>
 			</div>
-		</div>
-	
-		<div class="row watch-video text-center to-animate" style="margin-left: 0;">
-			<div class="col-md-12 section-heading text-center">
-				<h2 class="to-animate" data-section="general" style="margin-left: 0; font-size: 25px; padding-top: 20px;">Announcements</h2>
-			</div>
-			<div class="col-md-6 to-animate col-md-offset-3">
-					<h3 style="margin-left: 0; font-size: 20px; margin-top: -5px; width: 100%;">Login to vote for the most impressive project showcase - 23rd August, 2017</h3>
-					<br/>
-					<p style="font-size: 17px;">Throughout the showcase, you would have come across many impressive and innovative projects. Australia Votes allows you to vote for your favourite project, with results and winners released at the end of the event. Login to cast your vote!</p>
-					<br />
-					<h3 style="margin-left: 0; font-size: 20px;">Australia Votes enters Beta Testing - 23rd August, 2017</h3>
-					<br/>
-					<p style="font-size: 17px;">Australia Votes has been developed in collaboration with Deakin University to allow federal, state and local elections to enter the digital space. A team of talented students set out to bridge the gap while developing a platform with the necessary security for this critical infrastructure. We present to you, the public, Australia Votes.</p>
-					<br />
-			</div>
-		</div>
-	</div>
-</section>
-<section id="fh5co-services" data-section="services">
-	<div class="container text-center">
-		<div class="row">
-			<div class="col-md-12 section-heading text-center">
-				<h2 class="left-border to-animate" style="font-size: 25px; margin-left: -3%; padding-top: 50px;">Infrastructure</h2>
-				<div class="row">
-				</div>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-md-6 col-sm-6 fh5co-service to-animate">
-				<i class="icon to-animate-2 icon-lock" style="margin-bottom: -10px;"></i>
-				<h3 style="font-size: 25px; font-weight: 400;">Security</h3>
-				<p style="font-size: 17px;">State-of-the-art security schemes and data encryption techniques provide a stable, secure and robust voting system.</p>
-			</div>
-			<div class="col-md-6 col-sm-6 fh5co-service to-animate">
-				<i class="icon to-animate-2 icon-link" style="margin-bottom: -10px;"></i>
-				<h3 style="font-size: 25px; font-weight: 400;">Blockchain</h3>
-				<p style="font-size: 17px;">This groundbreaking technology utilised by crypto-currencies ensures vote integrity is preserved and data is available at all times.</p>
-			</div>
-			<div class="clearfix visible-sm-block"></div>
-			<div class="col-md-6 col-sm-6 fh5co-service to-animate">
-				<i class="icon to-animate-2 icon-support" style="margin-bottom: -10px; margin-top: 20px;"></i>
-				<h3 style="font-size: 25px; font-weight: 400;">Confidentiality</h3>
-				<p style="font-size: 17px;">Robust encryption algorithms prevent your personal or voting information from being disclosed to anyone but you.</p>
-			</div>
-			<div class="col-md-6 col-sm-6 fh5co-service to-animate">
-				<i class="icon to-animate-2 icon-layers2" style="margin-bottom: -15px; margin-top: 20px;"></i>
-				<h3 style="font-size: 25px; font-weight: 400;">Integrity</h3>
-				<p style="font-size: 17px;">Innovative blockchain technology prevents data modification. After submitting your vote, only AEC technology can decrypt and count your vote. </p>
 			<br />
+			<div class="fh5co-block to-animate" style="background-image: url(images/biometrics.jpg); margin-left: 4%; width: 30%; margin-right: 1%; margin-bottom: 1%;">
+				<div class="overlay-darker"></div>
+				<div class="overlay"></div>
+				<div class="fh5co-text">
+					<h2 style="font-size: 17px;">Voice as a Password</h2>
+					<p style="font-size: 15px;">A new biometric mechanism which utilises voice recognition technology as a password to authenticate users in government, banking and other application services. The system considers replay attack issues and introduces relevant solutions.</p>
+					<br /><input type="radio" name="candidate" value="3">
+				</div>
+			</div>
+			<div class="fh5co-block to-animate" style="background-image: url(images/vpn.jpg); width: 30%; margin-right: 1%; margin-bottom: 1%;">
+				<div class="overlay-darker"></div>
+				<div class="overlay"></div>
+				<div class="fh5co-text">
+					<h2 style="font-size: 17px;">One-TimePad VPN</h2>
+					<p style="font-size: 15px;">Quantum Encryption is theoretically secure but has flaws in its implementation and associated costs. One-TimePad is mathematically secure. This project provides a built module for LightRouter to prototype a One-TimePad network system.</p>
+					<br /><input type="radio" name="candidate" value="5">
+				</div>
+			</div>
+			<div class="fh5co-block to-animate" style="background-image: url(images/therm.jpg); width: 30%; margin-bottom: 1%;">
+				<div class="overlay-darker"></div>
+				<div class="overlay"></div>
+				<div class="fh5co-text">
+					<h2 style="font-size: 17px;">Course Thermometer</h2>
+					<p style="font-size: 15px;">Project leads are advised to contact Australia Votes to provide details of your project and desirables. While no description is provided, users may still choose to cast their vote for this project based off what they have demonstrated.</p>
+					<br /><input type="radio" name="candidate" value="6">
+				</div>
+			</div>
+			<br  />
+			<div class="fh5co-block to-animate" style="background-image: url(images/career.jpg); margin-left: 4%; width: 30%; margin-right: 1%; margin-bottom: 1%;">
+				<div class="overlay-darker"></div>
+				<div class="overlay"></div>
+				<div class="fh5co-text">
+					<h2 style="font-size: 17px;">Careers</h2>
+					<p style="font-size: 15px;">Project leads are advised to contact Australia Votes to provide details of your project and desirables. While no description is provided, users may still choose to cast their vote for this project based off what they have demonstrated.</p>
+					<br /><input type="radio" name="candidate" value="7">
+				</div>
+			</div>
+			<div class="fh5co-block to-animate" style="background-image: url(images/infra.jpg); width: 30%; margin-right: 1%; margin-bottom: 1%;">
+				<div class="overlay-darker"></div>
+				<div class="overlay"></div>
+				<div class="fh5co-text">
+					<h2 style="font-size: 17px;">Infrastructure as a Service</h2>
+					<p style="font-size: 15px;">This projects aims to develop a tool for Infrastructure-as-a-Service cloud computing. The tool will allow the user to specify the required architecture for their cloud-hosted infrastructure with estimated costs and deployment included.</p>
+					<br /><input type="radio" name="candidate" value="8">
+				</div>
+			</div>
+			<div class="fh5co-block to-animate" style="background-image: url(images/team.jpg); width: 30%; margin-bottom: 1%;">
+				<div class="overlay-darker"></div>
+				<div class="overlay"></div>
+				<div class="fh5co-text">
+					<h2 style="font-size: 17px;">Excon</h2>
+					<p style="font-size: 15px;">A master interface for controlling and evaluating team collaboration and goals. The interface provides a live visualisation of team progression, messaging between teams and individuals an logging of communication and activities.</p>
+					<br /><input type="radio" name="candidate" value="9">
+				</div>
+			</div>
+			<br  />
+			<div class="fh5co-block to-animate" style="background-image: url(images/pupil.jpg); margin-left: 4%; width: 30%; margin-right: 1%; margin-bottom: 1%;">
+				<div class="overlay-darker"></div>
+				<div class="overlay"></div>
+				<div class="fh5co-text">
+					<h2 style="font-size: 17px;">Pupillometer iOS</h2>
+					<p style="font-size: 15px;">A pupillometer iOS mobile application which utilises the device's LED flash and camera to detect, measure and track the pupil light reflex responses. This app can be relevant and accessible by healthcare providers such as doctors.</p>
+					<br /><input type="radio" name="candidate" value="10">
+				</div>
+			</div>
+			<div class="fh5co-block to-animate" style="background-image: url(images/pupil2.jpg); width: 30%; margin-right: 1%; margin-bottom: 1%;">
+				<div class="overlay-darker"></div>
+				<div class="overlay"></div>
+				<div class="fh5co-text">
+					<h2 style="font-size: 17px;">Pupillometer Android</h2>
+					<p style="font-size: 15px;">A pupillometer Android application which utilises the device's LED flash and camera to detect, measure and track the pupil light reflex responses. This app can be relevant and accessible by healthcare providers such as doctors.</p>
+					<br /><input type="radio" name="candidate" value="11">
+				</div>
+			</div>
+			<div class="fh5co-block to-animate" style="background-image: url(images/ai.jpg); width: 30%; margin-bottom: 1%;">
+				<div class="overlay-darker"></div>
+				<div class="overlay"></div>
+				<div class="fh5co-text">
+					<h2 style="font-size: 17px;">Stratejos</h2>
+					<p style="font-size: 15px;">An artificial intelligence system for managing software projects. The outcome of this project is to create a completely autonomous intelligence which frees teams from administration, data analysis and reporting constraints.</p>
+					<br /><input type="radio" name="candidate" value="12">
+				</div>
+			</div>
+			<br  />
+			<div class="fh5co-block to-animate" style="background-image: url(images/rental.jpg); margin-left: 4%; width: 30%; margin-right: 1%; margin-bottom: 1%;">
+				<div class="overlay-darker"></div>
+				<div class="overlay"></div>
+				<div class="fh5co-text">
+					<h2 style="font-size: 17px;">Property Inspector</h2>
+					<p style="font-size: 15px;">A novel mobile app for social property inspection. Users will benefit from defining housing criteria which will assist in tailored property inspections with an endgame as a platform for applications, statistics and rent value.</p>
+					<br /><input type="radio" name="candidate" value="13">
+				</div>
+			</div>
+			<div class="fh5co-block to-animate" style="background-image: url(images/algorithm.jpg); width: 30%; margin-right: 1%; margin-bottom: 1%;">
+				<div class="overlay-darker"></div>
+				<div class="overlay"></div>
+				<div class="fh5co-text">
+					<h2 style="font-size: 17px;">RedFid</h2>
+					<p style="font-size: 15px;">Research, evaluation and development into the fastest algorithm for determining the shortest paths for a Hitless Video Service across an IP network. A control system calculates the best path and configures the network for flow.</p>
+					<br /><input type="radio" name="candidate" value="14">
+				</div>
+			</div>
+			<div class="fh5co-block to-animate" style="background-image: url(images/chat.jpg); width: 30%; margin-bottom: 1%;">
+				<div class="overlay-darker"></div>
+				<div class="overlay"></div>
+				<div class="fh5co-text">
+					<h2 style="font-size: 17px;">ChatX</h2>
+					<p style="font-size: 15px;">A novel mobile application for people who co-exist in the same place such as transport and location. This platform provides a service where people can anonymously chat, socialise and share with those around them in a public space.</p>
+					<br /><input type="radio" name="candidate" value="15">
+				</div>
+			</div>
+			<br  />
+			<div class="fh5co-block to-animate" style="background-image: url(images/mail.jpg); margin-left: 4%; width: 30%; margin-right: 1%; margin-bottom: 1%;">
+				<div class="overlay-darker"></div>
+				<div class="overlay"></div>
+				<div class="fh5co-text">
+					<h2 style="font-size: 17px;">Follow Me Mail Redirection</h2>
+					<p style="font-size: 15px;">A service which exists as an alternative for conventional mail direction problems. The platform will provide notifications to existing mailers when individuals move from an address without the need for manual calls or updates.</p>
+					<br /><input type="radio" name="candidate" value="16">
+				</div>
+			</div>
+			<div class="fh5co-block to-animate" style="background-image: url(images/bus.jpg); width: 30%; margin-right: 1%; margin-bottom: 1%;">
+				<div class="overlay-darker"></div>
+				<div class="overlay"></div>
+				<div class="fh5co-text">
+					<h2 style="font-size: 17px;">Bus Tracker</h2>
+					<p style="font-size: 15px;">GPS and reporting of bus location to the general public. This system provides simulated bus movements and real-time coordinates to determine bus location, time of arrival and estimated travel time for individuals utilising buses.</p>
+					<br /><input type="radio" name="candidate" value="17">
+				</div>
+			</div>
+			<div class="fh5co-block to-animate" style="background-image: url(images/games.jpg); width: 30%; margin-bottom: 1%;">
+				<div class="overlay-darker"></div>
+				<div class="overlay"></div>
+				<div class="fh5co-text">
+					<h2 style="font-size: 17px;">Independent Games</h2>
+					<p style="font-size: 15px;">Development of a brand new digital game from initial concept through to publishing as a game studio. The project has identified product/market fit and designed a concept and core mechanics using industry-standard game engines.</p>
+					<br /><input type="radio" name="candidate" value="18">
+				</div>
+			</div>
+			<br  />
+			<div class="fh5co-block to-animate" style="background-image: url(images/ice.jpg); margin-left: 4%; width: 30%; margin-right: 1%; margin-bottom: 1%;">
+				<div class="overlay-darker"></div>
+				<div class="overlay"></div>
+				<div class="fh5co-text">
+					<h2 style="font-size: 17px;">ICE Project</h2>
+					<p style="font-size: 15px;">A game designed to be used by school students as part of a series of research activities around reducing substance abuse issues. The outcome should assess extent behaviour modification mechanisms can enhance player resilience.</p>
+					<br /><input type="radio" name="candidate" value="19">
+				</div>
+			</div>
+			<div class="fh5co-block to-animate" style="background-image: url(images/model.jpg); width: 30%; margin-right: 1%; margin-bottom: 1%;">
+				<div class="overlay-darker"></div>
+				<div class="overlay"></div>
+				<div class="fh5co-text">
+					<h2 style="font-size: 17px;">Architectural Assessment using VR</h2>
+					<p style="font-size: 15px;">A tool to assist students in submission of architectual design for assessment, with the assessor able to review the model in a virtual space. A real-time shared VR experience to walk through the design is the desired outcome.</p>
+					<br /><input type="radio" name="candidate" value="20">
+				</div>
+			</div>
+			<div class="fh5co-block to-animate" style="background-image: url(images/vr.jpg); width: 30%; margin-bottom: 1%;">
+				<div class="overlay-darker"></div>
+				<div class="overlay"></div>
+				<div class="fh5co-text">
+					<h2 style="font-size: 17px;">Snobal Project</h2>
+					<p style="font-size: 15px;">A virtual reality tutorial which helps to articulate the full potential of interactive virtual reality, provides guidelines around the use of hand controllers and demonstrate the emotional intensity of the VR platform.</p>
+					<br /><input type="radio" name="candidate" value="21">
+				</div>
+			</div>
 			<br />
+			<div class="fh5co-block to-animate" style="background-image: url(images/trade.jpg); width: 30%; margin-left: 35%;">
+				<div class="overlay-darker"></div>
+				<div class="overlay"></div>
+				<div class="fh5co-text">
+					<h2 style="font-size: 17px;">Capstone Promotional Material</h2>
+					<p style="font-size: 15px;">Project leads are advised to contact Australia Votes to provide details of your project and desirables. While no description is provided, users may still choose to cast their vote for this project based off what they have demonstrated.</p>
+					<br /><input type="radio" name="candidate" value="22">
+				</div>
 			</div>
 		</div>
+		<button value="submit" class="btn" style="background-color: #4CA1AF; color: #fff;">Submit</button>
+	<?php else : ?>
+			<br />
+            <p>
+                <center><span class="error">You are not authorized to access this page.</span><br  />Please <a href="index.php">login</a>.</center>
+            </p>
+        <?php endif; ?>
 	</div>
-</section>
-
-<div id="id02" class="modal">
-<form class="modal-content animate" action="includes/process_login.php" method="post" name="login_form">
-    <div class="imgcontainer">
-    <span onclick="document.getElementById('id02').style.display='none'" class="close2" title="Close Modal">&times;</span>
-</div>
-
-<div class="container">
-<img src="images/logo.png" style="width: 30%; margin-top: -10px">
 <br />
-<br />
-    <label><b>Username:</b></label>
-    <input type="text" placeholder="" name="email" required>
-<br />
-    <label><b>Password:</b></label>
-    <input type="password" placeholder="" name="password" id="password" required>
-<br />      
-<br />
-      <p style="font-size: 15px;">If you don't have a login, please <a href="register.php">register</a>.</p>
-      <p style="font-size: 15px;">You are currently logged <?php echo $logged ?>.</p>
-	  <input type="button" value="Login" class="button" style="margin-bottom: 10px; margin-top: 10px;"
-                   onclick="formhash(this.form, this.form.password);" /> 
-      <!--onclick="location.href='vote.php'"-->
-      <!-- onclick="location.href='vote.html'" -->
-    </div>
 </form>
-</div>
-<script>
-// Get the modal
-var modal = document.getElementById('id02');
-// When the user clicks anywhere outside of the modal, close it
-window.onclick = function(event) {
-    if (event.target == modal) {
-        modal.style.display = "none";
-    }
-}
-</script>
+</section> 
 <footer id="footer" role="contentinfo">
 	<div class="container">
 		<div class="">
 			<div class="col-md-12 text-center">
 				<p style="font-size: 17px;">Australia Votes | A Secure Online Voting System <br>This website was created in fulfilment of requirements of the Deakin University unit SIT302 - Project Delivery. <br />All imagery and logos have been labeled for reuse.</p>
 			</div>
-		<img src="images/deakin.jpg" style="width: 15%; display: block; margin: 0 auto; padding-top: 10px; margin-bottom: -20px; padding-top: 20px;">
 		</div>
+		<img src="images/deakin.jpg" style="width: 15%; display: block; margin: 0 auto; padding-top: 20px;">
 		<a href="#" class="gotop js-gotop" style="padding-top: 20px; padding-bottom: 10px;"><i class="icon-arrow-up2" style="color: #4CA1AF;"></i></a>
 	</div>
 </footer>
