@@ -8,9 +8,7 @@ sec_session_start();
 if ($_SESSION['timeout'] + 20 * 60 < time()) {
     header("Location: includes/logout.php");
 }
-?>
 
-<?php
 // Process form submission
 if(isset($_POST['submit'])) {
     if(isset($_POST['candidate'])) {

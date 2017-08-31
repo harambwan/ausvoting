@@ -5,6 +5,7 @@ sec_session_start();
 If ($_SESSION['voted'] == TRUE) {
     echo "Thanks for voting... Results will be displayed here once voting period has ended!";
     echo "You have been logged out.";
+    echo "[[[", $_SESSION['output'], "]]]"
     
     // Unset all session values 
     $_SESSION = array();

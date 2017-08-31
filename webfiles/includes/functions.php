@@ -4,15 +4,16 @@ include_once 'psl-config.php';
 
 // Process vote by executing bash script
 function vote($candidate) {
-    //Check database to make sure user has not voted yet...
-    
+    //Check database to make sure user has not voted yet
     
     //If user has not voted
     $old_path = getcwd();
     chdir('/home/ubuntu/corescripts');
     $output = shell_exec('./vote.sh ' + $candidate);
     chdir($old_path);
-
+    
+    //session['output'] to confirm voting was successful
+    $_SESSION['output'] = $output
     //Insert into database that user has voted...
     return true;
 
