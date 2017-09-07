@@ -164,14 +164,14 @@ if (login_check($mysqli) == true) {
 <img src="images/logo.png" style="width: 30%; margin-top: -10px">
 <br />
 <br />
-    <label><b>Username:</b></label>
+    <label><b>Email:</b></label>
     <input type="text" placeholder="" name="email" required>
 <br />
     <label><b>Password:</b></label>
     <input type="password" placeholder="" name="password" id="password" required>
 <br />      
 <br />
-      <p style="font-size: 15px;">If you don't have a login, please <a href="register.php">register</a>.</p>
+      <p style="font-size: 15px;">[ToBeRemoved] If you don't have a login, please <a href="register.php">register</a>.</p>
       <p style="font-size: 15px;">You are currently logged <?php echo $logged ?>.</p>
 	  <input type="submit" value="Login" class="button" style="margin-bottom: 10px; margin-top: 10px;"
                    onclick="formhash(this.form, this.form.password);" /> 

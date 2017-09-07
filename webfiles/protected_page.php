@@ -4,25 +4,6 @@ include_once 'includes/db_connect.php';
 include_once 'includes/functions.php';
 
 sec_session_start();
-
-if ($_SESSION['timeout'] + 20 * 60 < time()) {
-    header("Location: includes/logout.php");
-}
-
-// Process form submission
-if(isset($_POST['submit'])) {
-    if(isset($_POST['candidate'])) {
-        $candidate = $_POST['candidate'];
-        if ($candidate >= 0 && $candidate <= 22) {
-            // Execute shell script based on the form submission
-            $_SESSION['voted'] = vote($candidate);
-            
-            //Redirect to results page
-            header("Location: ./results.php");
-        }
-    }
-}
-    
 ?>
        
 <!DOCTYPE html>
@@ -79,7 +60,7 @@ if(isset($_POST['submit'])) {
 	</div>
 </section>
 <section id="fh5co-intro">
-<form method="post">
+<form action="includes/process_vote.php" method="post">
 	<div class="container" style="text-align: center;">
 		<div class="row row-bottom-padded-lg">
 			<div class="fh5co-block to-animate" style="background-image: url(images/books.jpg); margin-left: 4%; width: 30%; margin-right: 1%; margin-bottom: 1%;">
@@ -125,7 +106,7 @@ if(isset($_POST['submit'])) {
 				<div class="fh5co-text">
 					<h2 style="font-size: 17px;">One-TimePad VPN</h2>
 					<p style="font-size: 15px;">Quantum Encryption is theoretically secure but has flaws in its implementation and associated costs. One-TimePad is mathematically secure. This project provides a built module for LightRouter to prototype a One-TimePad network system.</p>
-					<br /><input type="radio" name="candidate" value="5">
+					<br /><input type="radio" name="candidate" value="4">
 				</div>
 			</div>
 			<div class="fh5co-block to-animate" style="background-image: url(images/therm.jpg); width: 30%; margin-bottom: 1%;">
@@ -134,7 +115,7 @@ if(isset($_POST['submit'])) {
 				<div class="fh5co-text">
 					<h2 style="font-size: 17px;">Course Thermometer</h2>
 					<p style="font-size: 15px;">Project leads are advised to contact Australia Votes to provide details of your project and desirables. While no description is provided, users may still choose to cast their vote for this project based off what they have demonstrated.</p>
-					<br /><input type="radio" name="candidate" value="6">
+					<br /><input type="radio" name="candidate" value="5">
 				</div>
 			</div>
 			<br  />
@@ -144,7 +125,7 @@ if(isset($_POST['submit'])) {
 				<div class="fh5co-text">
 					<h2 style="font-size: 17px;">Careers</h2>
 					<p style="font-size: 15px;">Project leads are advised to contact Australia Votes to provide details of your project and desirables. While no description is provided, users may still choose to cast their vote for this project based off what they have demonstrated.</p>
-					<br /><input type="radio" name="candidate" value="7">
+					<br /><input type="radio" name="candidate" value="6">
 				</div>
 			</div>
 			<div class="fh5co-block to-animate" style="background-image: url(images/infra.jpg); width: 30%; margin-right: 1%; margin-bottom: 1%;">
@@ -153,7 +134,7 @@ if(isset($_POST['submit'])) {
 				<div class="fh5co-text">
 					<h2 style="font-size: 17px;">Infrastructure as a Service</h2>
 					<p style="font-size: 15px;">This projects aims to develop a tool for Infrastructure-as-a-Service cloud computing. The tool will allow the user to specify the required architecture for their cloud-hosted infrastructure with estimated costs and deployment included.</p>
-					<br /><input type="radio" name="candidate" value="8">
+					<br /><input type="radio" name="candidate" value="7">
 				</div>
 			</div>
 			<div class="fh5co-block to-animate" style="background-image: url(images/team.jpg); width: 30%; margin-bottom: 1%;">
@@ -162,7 +143,7 @@ if(isset($_POST['submit'])) {
 				<div class="fh5co-text">
 					<h2 style="font-size: 17px;">Excon</h2>
 					<p style="font-size: 15px;">A master interface for controlling and evaluating team collaboration and goals. The interface provides a live visualisation of team progression, messaging between teams and individuals an logging of communication and activities.</p>
-					<br /><input type="radio" name="candidate" value="9">
+					<br /><input type="radio" name="candidate" value="8">
 				</div>
 			</div>
 			<br  />
@@ -172,7 +153,7 @@ if(isset($_POST['submit'])) {
 				<div class="fh5co-text">
 					<h2 style="font-size: 17px;">Pupillometer iOS</h2>
 					<p style="font-size: 15px;">A pupillometer iOS mobile application which utilises the device's LED flash and camera to detect, measure and track the pupil light reflex responses. This app can be relevant and accessible by healthcare providers such as doctors.</p>
-					<br /><input type="radio" name="candidate" value="10">
+					<br /><input type="radio" name="candidate" value="9">
 				</div>
 			</div>
 			<div class="fh5co-block to-animate" style="background-image: url(images/pupil2.jpg); width: 30%; margin-right: 1%; margin-bottom: 1%;">
@@ -181,7 +162,7 @@ if(isset($_POST['submit'])) {
 				<div class="fh5co-text">
 					<h2 style="font-size: 17px;">Pupillometer Android</h2>
 					<p style="font-size: 15px;">A pupillometer Android application which utilises the device's LED flash and camera to detect, measure and track the pupil light reflex responses. This app can be relevant and accessible by healthcare providers such as doctors.</p>
-					<br /><input type="radio" name="candidate" value="11">
+					<br /><input type="radio" name="candidate" value="10">
 				</div>
 			</div>
 			<div class="fh5co-block to-animate" style="background-image: url(images/ai.jpg); width: 30%; margin-bottom: 1%;">
@@ -190,7 +171,7 @@ if(isset($_POST['submit'])) {
 				<div class="fh5co-text">
 					<h2 style="font-size: 17px;">Stratejos</h2>
 					<p style="font-size: 15px;">An artificial intelligence system for managing software projects. The outcome of this project is to create a completely autonomous intelligence which frees teams from administration, data analysis and reporting constraints.</p>
-					<br /><input type="radio" name="candidate" value="12">
+					<br /><input type="radio" name="candidate" value="11">
 				</div>
 			</div>
 			<br  />
@@ -200,7 +181,7 @@ if(isset($_POST['submit'])) {
 				<div class="fh5co-text">
 					<h2 style="font-size: 17px;">Property Inspector</h2>
 					<p style="font-size: 15px;">A novel mobile app for social property inspection. Users will benefit from defining housing criteria which will assist in tailored property inspections with an endgame as a platform for applications, statistics and rent value.</p>
-					<br /><input type="radio" name="candidate" value="13">
+					<br /><input type="radio" name="candidate" value="12">
 				</div>
 			</div>
 			<div class="fh5co-block to-animate" style="background-image: url(images/algorithm.jpg); width: 30%; margin-right: 1%; margin-bottom: 1%;">
@@ -209,7 +190,7 @@ if(isset($_POST['submit'])) {
 				<div class="fh5co-text">
 					<h2 style="font-size: 17px;">RedFid</h2>
 					<p style="font-size: 15px;">Research, evaluation and development into the fastest algorithm for determining the shortest paths for a Hitless Video Service across an IP network. A control system calculates the best path and configures the network for flow.</p>
-					<br /><input type="radio" name="candidate" value="14">
+					<br /><input type="radio" name="candidate" value="13">
 				</div>
 			</div>
 			<div class="fh5co-block to-animate" style="background-image: url(images/chat.jpg); width: 30%; margin-bottom: 1%;">
@@ -218,7 +199,7 @@ if(isset($_POST['submit'])) {
 				<div class="fh5co-text">
 					<h2 style="font-size: 17px;">ChatX</h2>
 					<p style="font-size: 15px;">A novel mobile application for people who co-exist in the same place such as transport and location. This platform provides a service where people can anonymously chat, socialise and share with those around them in a public space.</p>
-					<br /><input type="radio" name="candidate" value="15">
+					<br /><input type="radio" name="candidate" value="14">
 				</div>
 			</div>
 			<br  />
@@ -228,7 +209,7 @@ if(isset($_POST['submit'])) {
 				<div class="fh5co-text">
 					<h2 style="font-size: 17px;">Follow Me Mail Redirection</h2>
 					<p style="font-size: 15px;">A service which exists as an alternative for conventional mail direction problems. The platform will provide notifications to existing mailers when individuals move from an address without the need for manual calls or updates.</p>
-					<br /><input type="radio" name="candidate" value="16">
+					<br /><input type="radio" name="candidate" value="15">
 				</div>
 			</div>
 			<div class="fh5co-block to-animate" style="background-image: url(images/bus.jpg); width: 30%; margin-right: 1%; margin-bottom: 1%;">
@@ -237,7 +218,7 @@ if(isset($_POST['submit'])) {
 				<div class="fh5co-text">
 					<h2 style="font-size: 17px;">Bus Tracker</h2>
 					<p style="font-size: 15px;">GPS and reporting of bus location to the general public. This system provides simulated bus movements and real-time coordinates to determine bus location, time of arrival and estimated travel time for individuals utilising buses.</p>
-					<br /><input type="radio" name="candidate" value="17">
+					<br /><input type="radio" name="candidate" value="16">
 				</div>
 			</div>
 			<div class="fh5co-block to-animate" style="background-image: url(images/games.jpg); width: 30%; margin-bottom: 1%;">
@@ -246,7 +227,7 @@ if(isset($_POST['submit'])) {
 				<div class="fh5co-text">
 					<h2 style="font-size: 17px;">Independent Games</h2>
 					<p style="font-size: 15px;">Development of a brand new digital game from initial concept through to publishing as a game studio. The project has identified product/market fit and designed a concept and core mechanics using industry-standard game engines.</p>
-					<br /><input type="radio" name="candidate" value="18">
+					<br /><input type="radio" name="candidate" value="17">
 				</div>
 			</div>
 			<br  />
@@ -256,7 +237,7 @@ if(isset($_POST['submit'])) {
 				<div class="fh5co-text">
 					<h2 style="font-size: 17px;">ICE Project</h2>
 					<p style="font-size: 15px;">A game designed to be used by school students as part of a series of research activities around reducing substance abuse issues. The outcome should assess extent behaviour modification mechanisms can enhance player resilience.</p>
-					<br /><input type="radio" name="candidate" value="19">
+					<br /><input type="radio" name="candidate" value="18">
 				</div>
 			</div>
 			<div class="fh5co-block to-animate" style="background-image: url(images/model.jpg); width: 30%; margin-right: 1%; margin-bottom: 1%;">
@@ -265,7 +246,7 @@ if(isset($_POST['submit'])) {
 				<div class="fh5co-text">
 					<h2 style="font-size: 17px;">Architectural Assessment using VR</h2>
 					<p style="font-size: 15px;">A tool to assist students in submission of architectual design for assessment, with the assessor able to review the model in a virtual space. A real-time shared VR experience to walk through the design is the desired outcome.</p>
-					<br /><input type="radio" name="candidate" value="20">
+					<br /><input type="radio" name="candidate" value="19">
 				</div>
 			</div>
 			<div class="fh5co-block to-animate" style="background-image: url(images/vr.jpg); width: 30%; margin-bottom: 1%;">
@@ -274,7 +255,7 @@ if(isset($_POST['submit'])) {
 				<div class="fh5co-text">
 					<h2 style="font-size: 17px;">Snobal Project</h2>
 					<p style="font-size: 15px;">A virtual reality tutorial which helps to articulate the full potential of interactive virtual reality, provides guidelines around the use of hand controllers and demonstrate the emotional intensity of the VR platform.</p>
-					<br /><input type="radio" name="candidate" value="21">
+					<br /><input type="radio" name="candidate" value="20">
 				</div>
 			</div>
 			<br />
@@ -284,7 +265,7 @@ if(isset($_POST['submit'])) {
 				<div class="fh5co-text">
 					<h2 style="font-size: 17px;">Capstone Promotional Material</h2>
 					<p style="font-size: 15px;">Project leads are advised to contact Australia Votes to provide details of your project and desirables. While no description is provided, users may still choose to cast their vote for this project based off what they have demonstrated.</p>
-					<br /><input type="radio" name="candidate" value="22">
+					<br /><input type="radio" name="candidate" value="21">
 				</div>
 			</div>
 		</div>

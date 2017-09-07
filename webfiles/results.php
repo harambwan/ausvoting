@@ -2,10 +2,10 @@
 include 'includes/functions.php';
 sec_session_start();
 
-If ($_SESSION['voted'] == TRUE) {
+if ($_SESSION['voted'] == 'YES') {
     echo "Thanks for voting... Results will be displayed here once voting period has ended!";
     echo "You have been logged out.";
-    echo "[[[", $_SESSION['output'], "]]]"
+    echo "[[[", $_SESSION['output'], "]]]";
     
     // Unset all session values 
     $_SESSION = array();
@@ -15,10 +15,7 @@ If ($_SESSION['voted'] == TRUE) {
     setcookie(session_name(),'', time() - 42000, $params["path"], $params["domain"], $params["secure"], $params["httponly"]);
     // Destroy session 
     session_destroy();
-}
-
-    
-If ($_SESSION['voted'] == FALSE) {
+} elseif ($_SESSION['voted'] == 'NO') {
     echo "You have already voted, or you are not logged in...";
     
     // Unset all session values 
@@ -29,6 +26,8 @@ If ($_SESSION['voted'] == FALSE) {
     setcookie(session_name(),'', time() - 42000, $params["path"], $params["domain"], $params["secure"], $params["httponly"]);
     // Destroy session 
     session_destroy();
+} else {
+    echo "Else";
 }
 ?>
 

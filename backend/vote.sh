@@ -1,8 +1,7 @@
 #!/bin/bash
-#Public Key file myst be located at ~/votekey/
 
 #Generate wallet ID
-address=$(multichain-cli ausvoting getnewaddress)
+address=$(multichain-cli ausvoting -conf=~/.multichain/ausvoting/multichain.conf -datadir=~/.multichain/ausvoting/ getnewaddress)
 
 #Make Vote
 mkdir /tmp/$address
@@ -27,15 +26,15 @@ vote=$(xxd -p -c 99999 /tmp/$address/vote.txt.enc)
 key=$(xxd -p -c 99999 /tmp/$address/key.bin.enc)
 
 #Grant write access
-multichain-cli ausvoting grant $address send
+multichain-cli ausvoting -conf=~/.multichain/ausvoting/multichain.conf -datadir=~/.multichain/ausvoting/ grant $address send
 
 #Write To Blockchain
 #multichain-cli ausvoting subscribe voting
-multichain-cli ausvoting publishfrom $address voting vote $vote
-multichain-cli ausvoting publishfrom $address voting key $key
+multichain-cli ausvoting -conf=~/.multichain/ausvoting/multichain.conf -datadir=~/.multichain/ausvoting/ publishfrom $address voting vote $vote
+multichain-cli ausvoting -conf=~/.multichain/ausvoting/multichain.conf -datadir=~/.multichain/ausvoting/ publishfrom $address voting key $key
 
 #Revoke write access
-multichain-cli ausvoting revoke $address send
+multichain-cli ausvoting -conf=~/.multichain/ausvoting/multichain.conf -datadir=~/.multichain/ausvoting/ revoke $address send
 
 #Cleanup Temp Directory
 rm /tmp/$address -r
