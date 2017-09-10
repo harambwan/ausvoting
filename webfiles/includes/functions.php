@@ -24,6 +24,11 @@ function sec_session_start() {
     
     // Record session time for timeout
     $_SESSION['timeout'] = time();
+    
+    //Declare index to remove errors on results.php
+    if ($_SESSION['voted'] == NULL) {
+        $_SESSION['voted'] == "";
+    }
 
     session_start();            // Start the PHP session 
     session_regenerate_id();    // regenerated the session, delete the old one. 

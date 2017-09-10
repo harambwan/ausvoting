@@ -39,7 +39,7 @@ if (login_check($mysqli) == true) {
         <ul style="padding-top: 10px;">
 			<li><a href="#" onclick="document.getElementById('id02').style.display='block'">Login</a></li>
             <li><a href="#">News</a></li>
-            <li><a href="#">Results</a></li>
+            <li><a href="results.php">Results</a></li>
         </ul>
     </div>
     <!-- Nav wrapper end -->

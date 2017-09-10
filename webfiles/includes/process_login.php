@@ -10,11 +10,20 @@ if (isset($_POST['email'], $_POST['p'])) {
     $password = $_POST['p']; // The hashed password.
     
     if (login($email, $password, $mysqli) == true) {
-        // ADD ‘If user has already voted, redirect to results.php’ displaying message 2)
+        // Login Success
+        //Check database to make sure user has not voted yet
+        $query = "SELECT voted FROM members WHERE id = ".$_SESSION['user_id'];
+        $voted_query = mysqli_query($mysqli, $query);
+        $voted_array = mysqli_fetch_assoc($voted_query);
+        $voted = $voted_array['voted'];
         
-        // Login success 
-        header("Location: ../protected_page.php");
-        exit();
+        if ($voted == NULL) {
+            header("Location: ../protected_page.php");
+            exit();
+        } else {
+            $_SESSION['voted'] = "NO";
+            header("Location: ../results.php");
+        }
     } else {
         // Login failed 
         header('Location: ../index.php?error=1');

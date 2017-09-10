@@ -1,33 +1,32 @@
 <?php
+//error reporting, disable later
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
 include 'includes/functions.php';
 sec_session_start();
 
 if ($_SESSION['voted'] == 'YES') {
-    echo "Thanks for voting... Results will be displayed here once voting period has ended!";
-    echo "You have been logged out.";
-    echo "[[[", $_SESSION['output'], "]]]";
+    print "You have voted for option: ", $_SESSION['candidate'], "\n";
+    echo "Thanks for voting... Results will be displayed here once voting period has ended!", "\n";
+    echo "You have been logged out.","\n";
+    echo "Script Output: ", $_SESSION['output'];
     
-    // Unset all session values 
+    // Kill Session
     $_SESSION = array();
-    // get session parameters 
     $params = session_get_cookie_params();
-    // Delete the actual cookie. 
     setcookie(session_name(),'', time() - 42000, $params["path"], $params["domain"], $params["secure"], $params["httponly"]);
-    // Destroy session 
     session_destroy();
 } elseif ($_SESSION['voted'] == 'NO') {
-    echo "You have already voted, or you are not logged in...";
+    echo "You have already voted...";
     
-    // Unset all session values 
+    // Kill Session
     $_SESSION = array();
-    // get session parameters 
     $params = session_get_cookie_params();
-    // Delete the actual cookie. 
     setcookie(session_name(),'', time() - 42000, $params["path"], $params["domain"], $params["secure"], $params["httponly"]);
-    // Destroy session 
     session_destroy();
 } else {
-    echo "Else";
+    echo "Redirected from homepage";
 }
 ?>
 

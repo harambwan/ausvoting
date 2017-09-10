@@ -23,7 +23,7 @@ if (isset($_POST['candidate']) && $_POST['candidate'] >= 0 && $_POST['candidate'
         $output = shell_exec($cmd);
         chdir($old_path);
         //Debugging
-        echo 'OUTPUT: ', $output;
+        $_SESSION['output'] = $output;
 */
     echo 'ATTEMPTED TO VOTE FOR: ', $candidate;
 
