@@ -25,9 +25,11 @@ if (isset($_POST['candidate']) && $_POST['candidate'] >= 0 && $_POST['candidate'
         //Debugging
         $_SESSION['output'] = $output;
 */
-    echo 'ATTEMPTED TO VOTE FOR: ', $candidate;
 
-    //Insert into database that user has voted...
+    //Insert into database that user has voted
+    $query = $mysqli->prepare("UPDATE members SET voted = 1 WHERE id = ?");
+    $query->bind_param('i', $_SESSION['user_id']);
+    $query->execute();
 
     $_SESSION['voted'] = 'YES';
     //Redirect to results page

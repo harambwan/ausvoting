@@ -7,7 +7,6 @@ include 'includes/functions.php';
 sec_session_start();
 
 if ($_SESSION['voted'] == 'YES') {
-    print "You have voted for option: ", $_SESSION['candidate'], "\n";
     echo "Thanks for voting... Results will be displayed here once voting period has ended!", "\n";
     echo "You have been logged out.","\n";
     echo "Script Output: ", $_SESSION['output'];

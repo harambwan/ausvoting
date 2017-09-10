@@ -17,6 +17,7 @@ if (isset($_POST['email'], $_POST['p'])) {
         $voted_array = mysqli_fetch_assoc($voted_query);
         $voted = $voted_array['voted'];
         
+        
         if ($voted == NULL) {
             header("Location: ../protected_page.php");
             exit();
