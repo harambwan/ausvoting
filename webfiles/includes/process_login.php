@@ -18,7 +18,7 @@ if (isset($_POST['email'], $_POST['p'])) {
         $voted = $voted_array['voted'];
         
         
-        if ($voted == NULL) {
+        if ($voted == NULL || $voted == 0) {
             header("Location: ../protected_page.php");
             exit();
         } else {

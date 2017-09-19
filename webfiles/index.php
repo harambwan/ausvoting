@@ -5,6 +5,9 @@ include_once 'includes/functions.php';
 
 sec_session_start();
 
+// Set variable to fix errors on results.php when coming from index.php
+$_SESSION['voted'] = 'INDEX';
+
 if (login_check($mysqli) == true) {
     $logged = 'in';
 } else {
@@ -171,7 +174,6 @@ if (login_check($mysqli) == true) {
     <input type="password" placeholder="" name="password" id="password" required>
 <br />      
 <br />
-      <p style="font-size: 15px;">[ToBeRemoved] If you don't have a login, please <a href="register.php">register</a>.</p>
       <p style="font-size: 15px;">You are currently logged <?php echo $logged ?>.</p>
 	  <input type="submit" value="Login" class="button" style="margin-bottom: 10px; margin-top: 10px;"
                    onclick="formhash(this.form, this.form.password);" /> 
