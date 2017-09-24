@@ -41,7 +41,7 @@ if [[ $2 ]] ; then
     #multichain-cli ausvoting revoke $address send
 
     #Cleanup Temp Directory
-    #rm /tmp/$2/ -r
+    rm /tmp/$2/ -r
 fi 
 
 #./vote.sh <candidate> <address>

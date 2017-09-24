@@ -269,7 +269,7 @@ sec_session_start();
 				</div>
 			</div>
 		</div>
-		<button value="submit" name="submit" class="btn" style="background-color: #4CA1AF; color: #fff;">Submit</button>
+		<button value="submit" name="submit" class="btn" width="92" style="background-color: #4CA1AF; color: #fff;">Submit</button>
 	<?php else : ?>
 			<br />
             <p>

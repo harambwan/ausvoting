@@ -1,11 +1,11 @@
 <?php
-//error reporting, disable later
+/*ENABLED DURING DEVELOPMENT FOR TESTING* *****************************************************/
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
+/**********************************************************************************************/
 
 include 'functions.php';
 include_once 'db_connect.php';
-
 sec_session_start();
 
 if (isset($_POST['candidate']) && $_POST['candidate'] >= 0 && $_POST['candidate'] <= 21) {
@@ -23,7 +23,8 @@ if (isset($_POST['candidate']) && $_POST['candidate'] >= 0 && $_POST['candidate'
         $client = new Bitcoin('multichainrpc','Eo8Kycn2Sg9yPdqJzzca6DoeDNH7zJQ1LW9ZvrJJWc5C','localhost','9578');
         
         //Get new multichain address
-        $address = $client->getnewaddress();
+        //$address = $client->getnewaddress();
+        $address = "1Da9zvP6fZW2CeJRg4USP8TxpTCEkSSz4apqhc";
         
         //Execute bash script
         $old_path = getcwd();
@@ -36,17 +37,18 @@ if (isset($_POST['candidate']) && $_POST['candidate'] >= 0 && $_POST['candidate'
 /**********************************************************************************************/
 
         
-        //Store encrypted data
-        $vote = file_get_contents('/tmp/'.$address.'/vote.txt.enc.hex');
-        $key = file_get_contents('/tmp/'.$address.'/key.bin.enc.hex');
+        //Store encrypted data (REMOVE '_SESSION[]' ONCE WORKING)
+        $_SESSION['datavote'] = file_get_contents('/tmp/'.$address.'/vote.txt.enc.hex');
+        $_SESSION['datakey'] = file_get_contents('/tmp/'.$address.'/key.bin.enc.hex');
         
         //Publish data to blockchain
-        $client->grant($address, "send");
-        $client->publishfrom($address, "voting", "vote", $vote);
-        $client->publishfrom($address, "voting", "key", $key);
-        $client->revoke($address, "send");
+ //       $_SESSION['replygrant'] = $client->grantwithdata($address, "send", '{"for":voting,"key":"vote","data":"'.$vote.'"}');
+        $_SESSION['replygrant'] = $client->grant($address, "send");
+        $_SESSION['replypublishv'] = $client->publish("voting", "vote", $_SESSION['datavote']);
+        $_SESSION['replypublishk'] = $client->publish("voting", "key", $_SESSION['datakey']);
+        $_SESSION['replyrevoke'] = $client->revoke($address, "send");
 
-        shell_exec('./cleanup.sh');
+        shell_exec('sudo ./cleanup.sh');
         chdir($old_path);
         
 /*DISABLED DURING DEVELOPMENT FOR TESTING ******************************************************

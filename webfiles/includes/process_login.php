@@ -17,13 +17,20 @@ if (isset($_POST['email'], $_POST['p'])) {
         $voted_array = mysqli_fetch_assoc($voted_query);
         $voted = $voted_array['voted'];
         
-        
-        if ($voted == NULL || $voted == 0) {
-            header("Location: ../protected_page.php");
+        //If user is the administrator, redirect to admin page
+        if ($_SESSION['user_id'] == 23) {
+            header("Location: ../adminconsole.php");
             exit();
         } else {
-            $_SESSION['voted'] = "NO";
-            header("Location: ../results.php");
+            //If user has not voted, redirect to voting page
+            if ($voted == NULL || $voted == 0) {
+                header("Location: ../protected_page.php");
+                exit();
+            //If user has voted, redirect to results page
+            } else {
+                $_SESSION['voted'] = "NO";
+                header("Location: ../results.php");
+            }
         }
     } else {
         // Login failed 
