@@ -17,7 +17,7 @@ sec_session_start();
 if (new DateTime() > new DateTime("2017-10-05 06:00:00")) {
     $results_published = true;
 } else {
-    $results_published = true;
+    $results_published = false;
 }
 
 if (isset($_SESSION['voted']) && $_SESSION['voted'] == 'YES') {
@@ -75,7 +75,7 @@ if (isset($_SESSION['voted']) && $_SESSION['voted'] == 'YES') {
                 var clock;
                 $(document).ready(function() {
                     var currentDate = new Date();
-                    var futureDate  = new Date(currentDate.getFullYear(), 10, 5, 16);
+                    var futureDate  = new Date(currentDate.getFullYear(), 9, 5, 6);
                     var diff = futureDate.getTime() / 1000 - currentDate.getTime() / 1000;
                     clock = $('.clock').FlipClock(diff, {
                         clockFace: 'DailyCounter',
