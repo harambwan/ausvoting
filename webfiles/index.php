@@ -174,11 +174,9 @@ if (login_check($mysqli) == true) {
     <input type="password" placeholder="" name="password" id="password" required>
 <br />      
 <br />
-      <p style="font-size: 15px;">You are currently logged <?php echo $logged ?>.</p>
+
 	  <input type="submit" value="Login" class="button" style="margin-bottom: 10px; margin-top: 10px;"
                    onclick="formhash(this.form, this.form.password);" /> 
-      <!--onclick="location.href='vote.php'"-->
-      <!-- onclick="location.href='vote.html'" -->
     </div>
 </form>
 </div>

@@ -1,18 +1,7 @@
 #!/bin/bash
-
-#Generate wallet ID
-#address=$(multichain-cli ausvoting  getnewaddress)
-
 if [[ $2 ]] ; then
-
     #Make Vote
     mkdir /tmp/$2
-
-    #if [ "$1" = "D" ] ; then
-    #    echo "donald" > /tmp/$address/vote.txt
-    #else
-    #    echo "hillary" > /tmp/$address/vote.txt
-    #fi
     echo $1 > /tmp/$2/vote.txt
 
     #Encrypt Vote
@@ -28,20 +17,7 @@ if [[ $2 ]] ; then
     key=$(xxd -p -c 99999 /tmp/$2/key.bin.enc)
     echo $vote > /tmp/$2/vote.txt.enc.hex
     echo $key > /tmp/$2/key.bin.enc.hex
-
-    #Grant write access
-    #multichain-cli ausvoting grant $address send
-
-    #Write To Blockchain
-    #multichain-cli ausvoting subscribe voting
-    #multichain-cli ausvoting publishfrom $address voting vote $vote
-    #multichain-cli ausvoting publishfrom $address voting key $key
-
-    #Revoke write access
-    #multichain-cli ausvoting revoke $address send
-
+    
     #Cleanup Temp Directory
     rm /tmp/$2/ -r
 fi 
-
-#./vote.sh <candidate> <address>

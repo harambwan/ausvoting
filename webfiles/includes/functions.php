@@ -199,3 +199,88 @@ function esc_url($url) {
         return $url;
     }
 }
+
+
+function json_rpc_send($host, $port, $user, $password, $method, $params=array())
+{
+    $url='http://'.$host.':'.$port.'/';
+
+    $payload=json_encode(array(
+        'id' => time(),
+        'method' => $method,
+        'params' => $params,
+    ));
+
+//	echo '<PRE>'; print_r($payload); echo '</PRE>';
+
+    $ch=curl_init($url);
+    curl_setopt($ch, CURLOPT_POST, true);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $payload);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_USERPWD, $user.':'.$password);
+    curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+        'Content-Type: application/json',
+        'Content-Length: '.strlen($payload)
+    ));
+
+    $response=curl_exec($ch);
+
+//	echo '<PRE>'; print_r($response); echo '</PRE>';
+
+    $result=json_decode($response, true);
+
+    if (!is_array($result)) {
+        $info=curl_getinfo($ch);
+        $result=array('error' => array(
+            'code' => 'HTTP '.$info['http_code'],
+            'message' => strip_tags($response).' '.$url
+        ));
+    }
+
+    return $result;
+}
+
+function set_multichain_chain($chain)
+{
+    global $multichain_chain;
+
+    $multichain_chain=$chain;
+}
+
+function multichain($method) // other params read from func_get_args()
+{
+    global $multichain_chain;
+
+    $args=func_get_args();
+
+    return json_rpc_send($multichain_chain['rpchost'], $multichain_chain['rpcport'], $multichain_chain['rpcuser'],
+        $multichain_chain['rpcpassword'], $method, array_slice($args, 1));
+}
+
+function output_rpc_error($error)
+{
+    echo '<div class="bg-danger" style="padding:1em;">Error: '.html($error['code']).'<br/>'.html($error['message']).'</div>';
+}
+
+function output_success_text($success)
+{
+    echo '<div class="bg-success" style="padding:1em;">'.html($success).'</div>';
+}
+
+function no_displayed_error_result(&$result, $response)
+{
+    if (is_array($response['error'])) {
+        $result=null;
+        output_rpc_error($response['error']);
+        return false;
+
+    } else {
+        $result=$response['result'];
+        return true;
+    }
+}
+
+function html($string)
+{
+    return htmlspecialchars($string);
+}

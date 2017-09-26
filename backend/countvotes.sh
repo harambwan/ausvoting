@@ -6,25 +6,28 @@ readarray addr < $p/addresses.txt
 
 for i in "${addr[@]}"
 do
-	dir=$p/data/$i
-	if ! [ -z "$(ls $dir)" ] ; then
-		#Convert from hex to raw
-        xxd -p -r $dir/vote.txt.enc.hex $dir/vote.txt.enc
-        xxd -p -r $dir/key.bin.enc.hex $dir/key.bin.enc
+        dir=$p/data/$i
+        if ! [ -z "$(ls $dir)" ] ; then
+                #Convert from hex to raw
+        cd $dir
+        xxd -p -r vote.txt.enc.hex vote.txt.enc
+        xxd -p -r key.bin.enc.hex key.bin.enc
         #Decrypt Random Password with Private Key
-        openssl rsautl -decrypt -inkey /home/ubuntu/corescripts/votekey/private.pem -in $dir/key.bin.enc -out $dir/key.bin
+        openssl rsautl -decrypt -inkey /home/ubuntu/corescripts/votekey/private.pem -in key.bin.enc -out key.bin
         #Decrypt Vote with Random Password
-        openssl enc -d -aes-256-cbc -in $dir/vote.txt.enc -out $dir/vote.txt -pass file:$dir/key.bin
+        openssl enc -d -aes-256-cbc -in vote.txt.enc -out vote.txt -pass file:key.bin
 
-        vote=$(cat $dir/vote.txt)
-        (( results[vote]++ ))
-	fi
+        vote=$(cat vote.txt)
+        (( results[$vote]++ ))
+        cd ../../../../
+        fi
 done
 
 #Output Results
-for i in "${results[@]}"
+#mkdir tmpcountvotes/results
+for ((i=0; i<${#results[*]}; i++));
 do
-    echo $i > /var/www/html/results/$@.txt
+    echo ${results[i]} > /var/www/html/results/$i.txt
 done
 
-#rm $p/* -r
+sudo rm $p/* -r
