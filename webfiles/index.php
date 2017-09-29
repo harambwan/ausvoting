@@ -40,8 +40,8 @@ if (login_check($mysqli) == true) {
 <div id="cssmenu">
 <img style="float: left; margin: 10px 10px 10px 10px; width: 13%;" src="images/logo.png">
         <ul style="padding-top: 10px;">
-			<li><a href="#" onclick="document.getElementById('id02').style.display='block'">Login</a></li>
-            <li><a href="#">News</a></li>
+	    <li><a href="#" onclick="document.getElementById('id02').style.display='block'">Login</a></li>
+            <li><a href="#" data-nav-section="services"><span>News</span></a></li>
             <li><a href="results.php">Results</a></li>
         </ul>
     </div>
@@ -108,11 +108,11 @@ if (login_check($mysqli) == true) {
 				<h2 class="to-animate" data-section="general" style="margin-left: 0; font-size: 25px; padding-top: 20px;">Announcements</h2>
 			</div>
 			<div class="col-md-6 to-animate col-md-offset-3">
-					<h3 style="margin-left: 0; font-size: 20px; margin-top: -5px; width: 100%;">Login to vote for the most impressive project showcase - 23rd August, 2017</h3>
+					<h3 style="margin-left: 0; font-size: 20px; margin-top: -5px; width: 100%;">Login to vote for the most impressive project showcase</h3>
 					<br/>
 					<p style="font-size: 17px;">Throughout the showcase, you would have come across many impressive and innovative projects. Australia Votes allows you to vote for your favourite project, with results and winners released at the end of the event. Login to cast your vote!</p>
 					<br />
-					<h3 style="margin-left: 0; font-size: 20px;">Australia Votes enters Beta Testing - 23rd August, 2017</h3>
+					<h3 style="margin-left: 0; font-size: 20px;">Australia Votes enters Beta Testing</h3>
 					<br/>
 					<p style="font-size: 17px;">Australia Votes has been developed in collaboration with Deakin University to allow federal, state and local elections to enter the digital space. A team of talented students set out to bridge the gap while developing a platform with the necessary security for this critical infrastructure. We present to you, the public, Australia Votes.</p>
 					<br />
@@ -167,12 +167,11 @@ if (login_check($mysqli) == true) {
 <img src="images/logo.png" style="width: 30%; margin-top: -10px">
 <br />
 <br />
-    <label><b>Email:</b></label>
+    <label><b>Email</b></label><br />
     <input type="text" placeholder="" name="email" required>
 <br />
-    <label><b>Password:</b></label>
+    <label><b>Password</b></label><br />
     <input type="password" placeholder="" name="password" id="password" required>
-<br />      
 <br />
 
 	  <input type="submit" value="Login" class="button" style="margin-bottom: 10px; margin-top: 10px;"

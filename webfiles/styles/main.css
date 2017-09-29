@@ -799,12 +799,6 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 
-<<<<<<< HEAD
-
-
-
-/************ added my massimo ************/
-
 .shadowfilter {
   -webkit-filter: drop-shadow(0px 0px 0px rgba(255,255,255,0.90));
   -webkit-transition: all 0.6s linear;
@@ -860,9 +854,6 @@ h1, h2, h3, h4, h5, h6 {
 .shadowfilter:hover {
   -webkit-filter: drop-shadow(0px 0px 50px rgba(6, 195, 212, 0.9));
 }
-
-/*************************/
->>>>>>> 510e12fe3e2901ff86d644e2e935c1797f5eee9b
 
 
 #fh5co-header {
@@ -1054,7 +1045,7 @@ h1, h2, h3, h4, h5, h6 {
   left: 0;
   right: 0;
   z-index: 2;
-  opacity: .6;
+  opacity: .4;
   -webkit-backface-visibility: hidden;
   background-color: #52d3aa;
   /* IE9, iOS 3.2+ */
