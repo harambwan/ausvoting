@@ -41,7 +41,7 @@ if (login_check($mysqli) == true) {
 <img style="float: left; margin: 10px 10px 10px 10px; width: 13%;" src="images/logo.png">
         <ul style="padding-top: 10px;">
 	    <li><a href="#" onclick="document.getElementById('id02').style.display='block'">Login</a></li>
-            <li><a href="#" data-nav-section="services"><span>News</span></a></li>
+            <!--<li><a href="#" data-nav-section="services"><span>News</span></a></li>-->
             <li><a href="results.php">Results</a></li>
         </ul>
     </div>

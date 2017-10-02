@@ -85,7 +85,7 @@ sec_session_start();
 				<div class="overlay-darker"></div>
 				<div class="overlay"></div>
 				<div class="fh5co-text">
-					<h2 style="font-size: 17px;">Creating a Virtual Pentesting Lab</h2>
+					<h2 style="font-size: 17px;">Virtual Penetration Testing Lab</h2>
 					<p style="font-size: 15px;">A virtual hacking environment that allows users to practice their hacking skills consisting of a small network of connected machines. The environment will provide a platform for practicing penetration testing techniques in web and networks.</p>
 					<br /><input type="radio" name="candidate" value="2">
 				</div>
@@ -113,8 +113,8 @@ sec_session_start();
 				<div class="overlay-darker"></div>
 				<div class="overlay"></div>
 				<div class="fh5co-text">
-					<h2 style="font-size: 17px;">Course Thermometer</h2>
-					<p style="font-size: 15px;">Project leads are advised to contact Australia Votes to provide details of your project and desirables. While no description is provided, users may still choose to cast their vote for this project based off what they have demonstrated.</p>
+					<h2 style="font-size: 17px;">Thermostat</h2>
+					<p style="font-size: 15px;">The thermostat project allows students or potential students to see the plan of a course, including all units, and how the course and units relate to GLO’s and CLO’s. It also allows them to see what future jobs might be available to them, and get into contact with the unit and course heads to discuss any questions they may have.</p>
 					<br /><input type="radio" name="candidate" value="5">
 				</div>
 			</div>
@@ -123,7 +123,7 @@ sec_session_start();
 				<div class="overlay-darker"></div>
 				<div class="overlay"></div>
 				<div class="fh5co-text">
-					<h2 style="font-size: 17px;">Careers</h2>
+					<h2 style="font-size: 17px;">Careers &amp; Education</h2>
 					<p style="font-size: 15px;">Project leads are advised to contact Australia Votes to provide details of your project and desirables. While no description is provided, users may still choose to cast their vote for this project based off what they have demonstrated.</p>
 					<br /><input type="radio" name="candidate" value="6">
 				</div>
@@ -151,7 +151,7 @@ sec_session_start();
 				<div class="overlay-darker"></div>
 				<div class="overlay"></div>
 				<div class="fh5co-text">
-					<h2 style="font-size: 17px;">Pupillometer iOS</h2>
+					<h2 style="font-size: 17px;">Pupillometer (iOS)</h2>
 					<p style="font-size: 15px;">A pupillometer iOS mobile application which utilises the device's LED flash and camera to detect, measure and track the pupil light reflex responses. This app can be relevant and accessible by healthcare providers such as doctors.</p>
 					<br /><input type="radio" name="candidate" value="9">
 				</div>
@@ -160,7 +160,7 @@ sec_session_start();
 				<div class="overlay-darker"></div>
 				<div class="overlay"></div>
 				<div class="fh5co-text">
-					<h2 style="font-size: 17px;">Pupillometer Android</h2>
+					<h2 style="font-size: 17px;">Pupillometer (Android)</h2>
 					<p style="font-size: 15px;">A pupillometer Android application which utilises the device's LED flash and camera to detect, measure and track the pupil light reflex responses. This app can be relevant and accessible by healthcare providers such as doctors.</p>
 					<br /><input type="radio" name="candidate" value="10">
 				</div>
@@ -207,7 +207,7 @@ sec_session_start();
 				<div class="overlay-darker"></div>
 				<div class="overlay"></div>
 				<div class="fh5co-text">
-					<h2 style="font-size: 17px;">Follow Me Mail Redirection</h2>
+					<h2 style="font-size: 17px;">Follow Me</h2>
 					<p style="font-size: 15px;">A service which exists as an alternative for conventional mail direction problems. The platform will provide notifications to existing mailers when individuals move from an address without the need for manual calls or updates.</p>
 					<br /><input type="radio" name="candidate" value="15">
 				</div>
@@ -216,7 +216,7 @@ sec_session_start();
 				<div class="overlay-darker"></div>
 				<div class="overlay"></div>
 				<div class="fh5co-text">
-					<h2 style="font-size: 17px;">Bus Tracker</h2>
+					<h2 style="font-size: 17px;">Bus Hop</h2>
 					<p style="font-size: 15px;">GPS and reporting of bus location to the general public. This system provides simulated bus movements and real-time coordinates to determine bus location, time of arrival and estimated travel time for individuals utilising buses.</p>
 					<br /><input type="radio" name="candidate" value="16">
 				</div>
@@ -225,7 +225,7 @@ sec_session_start();
 				<div class="overlay-darker"></div>
 				<div class="overlay"></div>
 				<div class="fh5co-text">
-					<h2 style="font-size: 17px;">Independent Games</h2>
+					<h2 style="font-size: 17px;">Swordlife</h2>
 					<p style="font-size: 15px;">Development of a brand new digital game from initial concept through to publishing as a game studio. The project has identified product/market fit and designed a concept and core mechanics using industry-standard game engines.</p>
 					<br /><input type="radio" name="candidate" value="17">
 				</div>
@@ -244,7 +244,7 @@ sec_session_start();
 				<div class="overlay-darker"></div>
 				<div class="overlay"></div>
 				<div class="fh5co-text">
-					<h2 style="font-size: 17px;">Architectural Assessment using VR</h2>
+					<h2 style="font-size: 17px;">InSpace</h2>
 					<p style="font-size: 15px;">A tool to assist students in submission of architectual design for assessment, with the assessor able to review the model in a virtual space. A real-time shared VR experience to walk through the design is the desired outcome.</p>
 					<br /><input type="radio" name="candidate" value="19">
 				</div>
@@ -259,13 +259,23 @@ sec_session_start();
 				</div>
 			</div>
 			<br />
-			<div class="fh5co-block to-animate" style="background-image: url(images/trade.jpg); width: 30%; margin-left: 35%;">
+			<div class="fh5co-block to-animate" style="background-image: url(images/trade.jpg); width: 30%; margin-right: 1%;">
 				<div class="overlay-darker"></div>
 				<div class="overlay"></div>
 				<div class="fh5co-text">
 					<h2 style="font-size: 17px;">Capstone Promotional Material</h2>
 					<p style="font-size: 15px;">Project leads are advised to contact Australia Votes to provide details of your project and desirables. While no description is provided, users may still choose to cast their vote for this project based off what they have demonstrated.</p>
 					<br /><input type="radio" name="candidate" value="21">
+				</div>
+			</div>
+            <br />
+			<div class="fh5co-block to-animate" style="background-image: url(images/netgazer.png); margin-left: 4%; width: 30%; margin-right: 1%;">
+				<div class="overlay-darker"></div>
+				<div class="overlay"></div>
+				<div class="fh5co-text">
+					<h2 style="font-size: 17px;">NetGazer</h2>
+					<p style="font-size: 15px;">NetGazer makes use of disjoint path algorithms to find two unique routes through a network with similar lengths. A plugin for the graph visualisation program Gephi was developed to allow visually testing and troubleshooting the algorithm, as well as for use in demonstrating the routing algorithm’s capabilities </p>
+					<br /><input type="radio" name="candidate" value="22">
 				</div>
 			</div>
 		</div>

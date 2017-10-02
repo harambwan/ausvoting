@@ -3,7 +3,7 @@ include 'functions.php';
 include_once 'db_connect.php';
 sec_session_start();
 
-if (isset($_POST['candidate']) && $_POST['candidate'] >= 0 && $_POST['candidate'] <= 21) {
+if (isset($_POST['candidate']) && $_POST['candidate'] >= 0 && $_POST['candidate'] <= 22) {
     $candidate = $_POST['candidate'];
 
     //Check database to make sure user has not voted yet

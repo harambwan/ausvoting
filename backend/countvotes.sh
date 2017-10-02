@@ -1,5 +1,5 @@
 #!/bin/bash
-results=(0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0)
+results=(0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0)
 
 p='/home/ubuntu/corescripts/tmpcountvotes'
 readarray addr < $p/addresses.txt

@@ -34,10 +34,13 @@ if ($_SESSION['user_id'] == 23) {
             }
         }
     }
+    
+    
 
     chdir('..');
     shell_exec('sudo ./countvotes.sh');
     chdir($old_path);
+    publishresults('true');
     header("Location: ../results.php");    
     
 } else {

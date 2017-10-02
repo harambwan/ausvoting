@@ -284,3 +284,8 @@ function html($string)
 {
     return htmlspecialchars($string);
 }
+
+function publishresults($bool) {
+    $f = fopen('results_published.txt', 'w');
+    fwrite($f, $bool);
+}
