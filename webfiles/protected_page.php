@@ -29,7 +29,7 @@ sec_session_start();
 <div id="cssmenu">
 <img style="float: left; margin: 10px 10px 10px 10px; width: 13%;" src="images/logo.png">
         <ul style="padding-top: 10px;">
-		<?php if (login_check($mysqli) == true) {
+		<?php if (isset($_SESSION['user_id'])) {
 			echo '<li><a href="includes/logout.php">Logout</a></li>';
 		}
 		else {
@@ -43,7 +43,7 @@ sec_session_start();
 <body>
 <section id="fh5co-services" data-section="services" style="width: 100%;">
 	<div class="container text-center">
-	<?php if (login_check($mysqli) == true) : ?>
+	<?php if (isset($_SESSION['user_id'])) : ?>
         <p style="font-size: 25px;">Welcome <?php echo htmlentities($_SESSION['username']); ?>!</p>
 		<div class="row">
 			<div class="col-md-12 section-heading text-center">
@@ -63,7 +63,7 @@ sec_session_start();
 <form action="includes/process_vote.php" method="post">
 	<div class="container" style="text-align: center;">
 		<div class="row row-bottom-padded-lg">
-			<div class="fh5co-block to-animate" style="background-image: url(images/books.jpg); margin-left: 4%; width: 30%; margin-right: 1%; margin-bottom: 1%;">
+<div class="fh5co-block to-animate" style="background-image: url(images/books.jpg); margin-left: 4%; width: 30%; margin-right: 1%; margin-bottom: 1%;">
 				<div class="overlay-darker"></div>
 				<div class="overlay"></div>
 				<div class="fh5co-text">
@@ -114,7 +114,7 @@ sec_session_start();
 				<div class="overlay"></div>
 				<div class="fh5co-text">
 					<h2 style="font-size: 17px;">Thermostat</h2>
-					<p style="font-size: 15px;">The thermostat project allows students or potential students to see the plan of a course, including all units, and how the course and units relate to GLO’s and CLO’s. It also allows them to see what future jobs might be available to them, and get into contact with the unit and course heads to discuss any questions they may have.</p>
+					<p style="font-size: 15px;">The Thermostat Project allows students to see course plans, including units and how the course and units relate to outcomes. It also allows them to see career opportunities and contact university academics to discuss any questions they may have.</p>
 					<br /><input type="radio" name="candidate" value="5">
 				</div>
 			</div>
@@ -254,12 +254,12 @@ sec_session_start();
 				<div class="overlay"></div>
 				<div class="fh5co-text">
 					<h2 style="font-size: 17px;">Snobal Project</h2>
-					<p style="font-size: 15px;">A virtual reality tutorial which helps to articulate the full potential of interactive virtual reality, provides guidelines around the use of hand controllers and demonstrate the emotional intensity of the VR platform.</p>
+					<p style="font-size: 15px;">A virtual reality tutorial which helps to articulate the full potential of interactive virtual reality, provides guidelines around the use of hand controllers and demonstrate the emotional intensity of the VR platform experience.</p>
 					<br /><input type="radio" name="candidate" value="20">
 				</div>
 			</div>
 			<br />
-			<div class="fh5co-block to-animate" style="background-image: url(images/trade.jpg); width: 30%; margin-right: 1%;">
+			<div class="fh5co-block to-animate" style="background-image: url(images/trade.jpg); width: 30%; margin-right: 1%; margin-left: 20%;">
 				<div class="overlay-darker"></div>
 				<div class="overlay"></div>
 				<div class="fh5co-text">
@@ -268,13 +268,12 @@ sec_session_start();
 					<br /><input type="radio" name="candidate" value="21">
 				</div>
 			</div>
-            <br />
-			<div class="fh5co-block to-animate" style="background-image: url(images/netgazer.png); margin-left: 4%; width: 30%; margin-right: 1%;">
+			<div class="fh5co-block to-animate" style="background-image: url(images/netgazer.png); width: 30%; margin-right: 1%;">
 				<div class="overlay-darker"></div>
 				<div class="overlay"></div>
 				<div class="fh5co-text">
 					<h2 style="font-size: 17px;">NetGazer</h2>
-					<p style="font-size: 15px;">NetGazer makes use of disjoint path algorithms to find two unique routes through a network with similar lengths. A plugin for the graph visualisation program Gephi was developed to allow visually testing and troubleshooting the algorithm, as well as for use in demonstrating the routing algorithm’s capabilities </p>
+					<p style="font-size: 15px;">NetGazer makes use of disjoint path algorithms to find two unique routes through a network with similar lengths. A plugin for the graph visualisation program Gephi was developed to allow visually testing and troubleshooting the algorithm.</p>
 					<br /><input type="radio" name="candidate" value="22">
 				</div>
 			</div>

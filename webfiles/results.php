@@ -10,7 +10,7 @@ sec_session_start();
 	<meta charset="utf-8">
 	<!--<meta http-equiv="X-UA-Compatible" content="IE=edge">-->
 	<title>Results</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="description" content="Free HTML5 Template by FREEHTML5.CO" />
 	<meta name="keywords" content="free html5, free template, free bootstrap, html5, css3, mobile first, responsive" />
 	<meta name="author" content="FREEHTML5.CO" />
@@ -65,7 +65,7 @@ if (isset($_SESSION['voted']) && $_SESSION['voted'] == 'YES') {
     $params = session_get_cookie_params();
     setcookie(session_name(),'', time() - 42000, $params["path"], $params["domain"], $params["secure"], $params["httponly"]);
     session_destroy();
-} elseif (isset($_SESSION['voted']) && $_SESSION['voted'] == 'NO') {
+} elseif (isset($_SESSION['voted']) && $_SESSION['voted'] == 'NO' && $results_published == false) {
     echo "<h1>Results</h1><br /><br />You have already voted in this election.<br><b>You have been logged out.</b>";
     
     // Kill Session
@@ -171,12 +171,12 @@ function drawStuff() {
 <br />
     
 <?php else : ?>
-    <div class="flip-counter clock flip-clock-wrapper" style="margin-top: 4%;">
+    <div class="flip-counter clock flip-clock-wrapper" style="margin-top: 4%; margin-left: 29.5%; width: 100%;">
     <script type="text/javascript">
         var clock;
         $(document).ready(function() {
             var currentDate = new Date();
-            var futureDate  = new Date(currentDate.getFullYear(), 9, 5, 6);
+            var futureDate  = new Date(currentDate.getFullYear(), 9, 5, 19);
             var diff = futureDate.getTime() / 1000 - currentDate.getTime() / 1000;
             clock = $('.clock').FlipClock(diff, {
                 clockFace: 'DailyCounter',

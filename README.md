@@ -1,5 +1,11 @@
 # ausvoting
-Ausvoting is a government-based voting application targeted towards Web users (at the current stage of development) using Javascript, PHP and HTML/CSS.
+Our platform, Australia Votes, bridges the gap between the needs of modern elections and the digital space. Using innovative technology, secure infrastructure design and robust threat mitigation strategies our talented team, largely consisting of Cyber Security professionals, have developed the secure and reliable online voting system that Australia needs.
+
+Our system accurately records, and securely stores voting data anonymously in a distributed blockchain-based network which ensures availability and immutability throughout the voting process. It is extremely easy to scale, whether it be a local council election or a federal election to decide the future of our nation, by simply deploying more instances of the server image.
+
+Our final product can be seen at https://ausvoting.ddns.net/
+
+To give it a test drive, browse to https://ausvoting.ddns.net/register.php and create an account to log in with. (The actual product assumes that accounts are pre-registered according to real people's identities, therefore there are no links to it but for the purpose of this demo I included the function for you to create your own).
 
 What is this repository for?
 
@@ -8,22 +14,23 @@ Target audiences - Registered Australian voters interested in simplyfying and ma
 Version - 2.0
 
 How do I get set up?
-  * Ensure an appropiate server is hosting the required files
-  *
-  *
-  
+  * Setup Apache, PHP and MySQL on a unix web server
+  * Enable HTTPS with either a self-signed certificate or from https://certbot.eff.org/
+  * Setup the MySQL server
+  * Install the MultiChain client and follow the steps at https://www.multichain.com/getting-started/
+  * git clone https://github.com/harambwan/ausvoting.git into the web directory ('/var/www/html')
+  * Configure the data in includes/psl-config.php to your MySQL credentials
+  * Configure the JSON RPC settings in includes/process_vote.php and includes/countvotes.php to point to the local MultiChain client's credentials
+
 
 Dependencies
 
 Database configuration --- Database developers to elaborate on (explain what databases have been created)
 
-
 How to run tests ---- Security analysts to expand upon
 
-
-
-
 Deployment instructions --- dependent on user desire
+
 Referenced source material — licenses.txt file details any used graphics, with additionally referenced source code both in the file and within the program code
 
 Contribution guidelines
@@ -48,22 +55,15 @@ There will definitely be feedback for you regarding your contribution, or possib
 
 If you do these things, it will be make evaluation and acceptance easy, so please do these things :)
 
-What is supported?
-
-At the current stage of development, AusVoting is perfectly capable of being run on the following (with some dire CSS upgrades needed for web display):
-Internet Explorer
-Chrome
-Safari
-Firefox
 
 Who do I talk to?
 
 Members of development team with contact emails:
-Aaron Robertson
+Aaron Robertson (raaron@deakin.edu.au)
 James Ward-Smith
 James Terrence Blenkinsop
 Damien Eden
-Jordy Stewart - Jordan_Stewart@hotmail.com.au
+Jordy Stewart (Jordan_Stewart@hotmail.com.au)
 Ryan rodrigues
 Shuchen Yang
 Colby clayton

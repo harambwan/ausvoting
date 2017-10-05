@@ -36,11 +36,10 @@ if (login_check($mysqli) == true) {
 	<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,300,600,400italic,700' rel='stylesheet' type='text/css'>
 </head>
 <body>
-
-<div id="cssmenu">
+<div id="cssmenu" style="width: auto;">
 <img style="float: left; margin: 10px 10px 10px 10px; width: 13%;" src="images/logo.png">
-        <ul style="padding-top: 10px;">
-	    <li><a href="#" onclick="document.getElementById('id02').style.display='block'">Login</a></li>
+        <ul style="padding-top: 10px; width: auto;">
+	   <li><a href="#" onclick="document.getElementById('id02').style.display='block'">Login</a></li>
             <!--<li><a href="#" data-nav-section="services"><span>News</span></a></li>-->
             <li><a href="results.php">Results</a></li>
         </ul>
@@ -53,15 +52,14 @@ if (login_check($mysqli) == true) {
             echo "<script type='text/javascript'>alert('$message');</script>";
         }
         ?> 
-<section id="fh5co-home" data-section="home" style="background-image: url(images/main.jpg);" data-stellar-background-ratio="0.5">
-	<div class="gradient"></div>
-	<div class="container">
+<section id="fh5co-home" data-section="home" style="background-image: url(images/main.jpg); height: auto; width: auto; background-size: 100%; background-repeat: auto;" data-stellar-background-ratio="0.5">
+	<div class="gradient" style="height: auto; width: auto; background-size: 100%;"></div>
+	<div class="container" style="height: auto; width: auto; background-size: 100%;">
 		<div class="text-wrap">
 			<div class="text-inner">
 				<div class="row">
 					<div class="col-md-8 col-md-offset-2">
-							<div style="padding-top: 10px;" >
-							</div>
+						
 						</div>
 					</div>
 				</div>
